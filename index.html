@@ -17,6 +17,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/r.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{
   --paper:#EEF2EC;      /* 통장 속지 같은 옅은 회녹색 */
@@ -32,6 +33,7 @@
   --c-code:#0E7C66;
   --c-issue:#B4730B;
   --c-paper:#6B4FA8;
+  --c-chart:#0B7A99;
   --focus:#2F5BD3;
   --serif:"Gowun Batang",serif;
   --sans:"IBM Plex Sans KR",system-ui,sans-serif;
@@ -40,12 +42,12 @@
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --paper:#121A18;--sheet:#18221F;--ink:#E4ECE8;--ink-2:#AAB8B3;--ink-3:#71807B;--rule:#2C3934;
-    --rise:#F0626B;--fall:#7C9BF0;--c-concept:#F0626B;--c-job:#7C9BF0;--c-code:#3FBF9D;--c-issue:#E3A63B;--c-paper:#A98AE6;--focus:#7C9BF0;
+    --rise:#F0626B;--fall:#7C9BF0;--c-concept:#F0626B;--c-job:#7C9BF0;--c-code:#3FBF9D;--c-issue:#E3A63B;--c-paper:#A98AE6;--c-chart:#4CC3DE;--focus:#7C9BF0;
   }
 }
 :root[data-theme="dark"]{
   --paper:#121A18;--sheet:#18221F;--ink:#E4ECE8;--ink-2:#AAB8B3;--ink-3:#71807B;--rule:#2C3934;
-  --rise:#F0626B;--fall:#7C9BF0;--c-concept:#F0626B;--c-job:#7C9BF0;--c-code:#3FBF9D;--c-issue:#E3A63B;--c-paper:#A98AE6;--focus:#7C9BF0;
+  --rise:#F0626B;--fall:#7C9BF0;--c-concept:#F0626B;--c-job:#7C9BF0;--c-code:#3FBF9D;--c-issue:#E3A63B;--c-paper:#A98AE6;--c-chart:#4CC3DE;--focus:#7C9BF0;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -98,6 +100,7 @@ h2{font-size:21px;margin:0 0 14px;font-weight:700}
 [data-corner="code"]{--cc:var(--c-code)}
 [data-corner="issue"]{--cc:var(--c-issue)}
 [data-corner="paper"]{--cc:var(--c-paper)}
+[data-corner="chart"]{--cc:var(--c-chart)}
 
 /* 홈: 오늘 */
 .today{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:28px;align-items:start}
@@ -122,11 +125,22 @@ h2{font-size:21px;margin:0 0 14px;font-weight:700}
 .topics li{font-size:13.5px;padding:3px 10px;border-radius:999px;background:var(--sheet);border:1px solid var(--rule)}
 .weeklist{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
 .weeklist li{border-bottom:1px solid var(--rule)}
-.weeklist a,.weeklist .slot{display:grid;grid-template-columns:66px 1fr auto;gap:10px;align-items:baseline;padding:10px 2px;text-decoration:none}
+.weeklist li{display:grid;grid-template-columns:66px minmax(0,1fr);gap:10px;padding:10px 2px;align-items:baseline}
+.wis{display:grid;gap:5px}
+.wi{display:flex;gap:8px;align-items:baseline;text-decoration:none;padding-left:12px;position:relative}
+.wi::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--cc)}
+.wi .readmark{margin-left:auto;flex:none}
 .weeklist .dow{font:500 13px var(--mono);color:var(--ink-3);white-space:nowrap}
 .weeklist .t{font-size:15px}
 .weeklist .slot .t{color:var(--ink-3)}
+.weeklist .slot::before{background:transparent;box-shadow:inset 0 0 0 1px var(--cc)}
 .weeklist a:hover .t{text-decoration:underline}
+.leads{display:grid;gap:14px;min-width:0}
+.lead2{display:block;background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--cc);border-radius:12px;padding:16px 22px;text-decoration:none}
+.lead2:hover{border-color:var(--ink-3);border-left-color:var(--cc)}
+.lead2 .date{font-size:13px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;margin-bottom:6px}
+.lead2 h2{font-family:var(--serif);font-size:20px;margin:0 0 4px}
+.lead2 p{margin:0;color:var(--ink-2);font-size:15px}
 .readmark{font-size:12px;color:var(--rise);font-weight:600}
 
 /* 과정 진도 + 달력 */
@@ -211,6 +225,11 @@ select.search{flex:0 1 200px}
 .prose img{max-width:100%;height:auto;border-radius:8px}
 .prose hr{border:0;border-top:1px solid var(--rule);margin:32px 0}
 .prose a{color:var(--fall)}
+.chartfig{margin:8px 0 26px;padding:16px 16px 12px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px}
+.chartfig .ct{font-weight:600;font-size:15px;margin-bottom:10px}
+.chartfig .cbox{position:relative;height:280px}
+.chartfig .cs{font-size:13px;color:var(--ink-3);margin-top:8px}
+@media (max-width:640px){.chartfig .cbox{height:220px}}
 .katex-display{overflow-x:auto;overflow-y:hidden;padding:4px 0}
 .hljs{background:transparent!important;color:var(--ink)}
 
@@ -358,7 +377,8 @@ const CONFIG = {
   COURSE_END: "2027-04-16",
 };
 const CORNERS = {
-  concept:{name:"오늘의 개념", dow:"월"},
+  concept:{name:"오늘의 개념", dow:"매일"},
+  chart:{name:"차트 한 장", dow:"월"},
   job:{name:"직무 돋보기", dow:"화"},
   code:{name:"개념 + 코드 한 스푼", dow:"수"},
   issue:{name:"이슈 브리핑", dow:"목"},
@@ -399,7 +419,10 @@ const cache = {};
 const once = (k, f) => cache[k] ??= f().catch(e => { delete cache[k]; throw e; });
 const getHolidays = () => once("hol",   () => api("daily_holidays?select=*&order=holiday_date"));
 const getJobs     = () => once("jobs",  () => api("daily_jobs?select=*&order=sort_order"));
-const getList     = () => once("list",  () => api(`daily_articles?select=${LIST_COLS}&order=publish_date.desc,id.desc`));
+const rankOf = c => c === "concept" ? 0 : 1;
+const getList     = () => once("list",  () => api(`daily_articles?select=${LIST_COLS}&order=publish_date.desc,id.desc`).then(r => r.sort((a,b) => a.publish_date === b.publish_date ? rankOf(b.corner) - rankOf(a.corner) : (a.publish_date < b.publish_date ? 1 : -1))));
+const dayMap = list => { const m = new Map(); list.forEach(a => { if(!m.has(a.publish_date)) m.set(a.publish_date, []); m.get(a.publish_date).push(a); }); m.forEach(v => v.sort((a,b) => rankOf(a.corner) - rankOf(b.corner))); return m; };
+const cornerOfDay = d => Object.keys(CORNERS).find(k => CORNERS[k].dow === dowOf(d));
 const getTerms    = () => once("terms", () => api("daily_terms?select=id,term,term_en,definition,article_id&order=term"));
 const getArticle  = slug => once("a:"+slug, () => api(`daily_articles?select=*&slug=eq.${encodeURIComponent(slug)}&limit=1`).then(r => r[0] || null));
 
@@ -419,7 +442,36 @@ function renderMd(md){
   });
   return html;
 }
+function renderCharts(root){
+  const cs = getComputedStyle(document.documentElement);
+  const v = n => cs.getPropertyValue(n).trim();
+  const palette = [v("--c-chart"), v("--rise"), v("--c-job"), v("--c-issue"), v("--c-paper")];
+  root.querySelectorAll("pre > code.language-chart").forEach(code => {
+    const pre = code.parentElement;
+    let spec;
+    try { spec = JSON.parse(code.textContent); } catch(e){ return; }
+    const fig = document.createElement("figure");
+    fig.className = "chartfig";
+    fig.innerHTML = `${spec.title ? `<figcaption class="ct">${esc(spec.title)}</figcaption>` : ""}<div class="cbox"><canvas role="img" aria-label="${esc(spec.title || "차트")}"></canvas></div>${spec.source ? `<figcaption class="cs">출처: ${esc(spec.source)}${spec.note ? ` · ${esc(spec.note)}` : ""}</figcaption>` : ""}`;
+    pre.replaceWith(fig);
+    if(typeof Chart === "undefined") return;
+    const unit = spec.unit || "";
+    new Chart(fig.querySelector("canvas"), {
+      type: spec.type === "bar" ? "bar" : "line",
+      data: { labels: spec.labels || [], datasets: (spec.datasets || []).map((d, i) => ({
+        label: d.label, data: d.data, stepped: !!spec.stepped,
+        borderColor: palette[i % palette.length], backgroundColor: palette[i % palette.length] + (spec.type === "bar" ? "cc" : "22"),
+        borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, fill: spec.type !== "bar" && (spec.datasets || []).length === 1, tension: 0 })) },
+      options: { responsive:true, maintainAspectRatio:false, interaction:{mode:"index", intersect:false},
+        plugins: { legend:{ display:(spec.datasets || []).length > 1, labels:{ color:v("--ink-2") } },
+          tooltip:{ callbacks:{ label: c => `${c.dataset.label}: ${c.formattedValue}${unit}` } } },
+        scales: { x:{ ticks:{ color:v("--ink-3"), maxRotation:0, autoSkip:true, maxTicksLimit:8 }, grid:{ display:false } },
+                  y:{ ticks:{ color:v("--ink-3"), callback: x => x + unit }, grid:{ color:v("--rule") }, suggestedMin: spec.yMin, suggestedMax: spec.yMax } } }
+    });
+  });
+}
 function highlight(root){
+  renderCharts(root);
   root.querySelectorAll("pre code").forEach(el => { try{ hljs.highlightElement(el); }catch(e){} });
   root.querySelectorAll(".prose a[href^='http']").forEach(a => { a.target = "_blank"; a.rel = "noopener"; });
 }
@@ -449,22 +501,24 @@ async function pageHome(){
   const latest = list[0];
   const anchor = today < CONFIG.COURSE_START ? CONFIG.COURSE_START : (today > CONFIG.COURSE_END ? CONFIG.COURSE_END : today);
   const wkMon = mondayOf(anchor), wkFri = addDays(wkMon, 4);
-  const byDate = new Map(); list.forEach(a => { if(!byDate.has(a.publish_date)) byDate.set(a.publish_date, a); });
-
-  // 오늘의 글
+  // 오늘의 글 (가장 최근 날짜의 개념 + 요일 코너)
+  const days2 = dayMap(list);
   let lead;
   if(!latest){
-    lead = `<div class="empty"><strong>첫 글은 ${esc(fmtD(CONFIG.COURSE_START))} 아침에 올라와요</strong>매일 평일 아침, 수업 전에 7분이면 읽을 수 있는 글이 한 편씩 쌓입니다.</div>`;
+    lead = `<div class="empty"><strong>첫 글은 ${esc(fmtD(CONFIG.COURSE_START))} 아침에 올라와요</strong>매일 평일 아침, 오늘의 개념과 요일별 코너 한 편씩 모두 두 편이 올라옵니다.</div>`;
   } else {
-    const isToday = latest.publish_date === today;
-    const isRead = read.has(latest.slug);
-    lead = `<article class="lead" data-corner="${esc(latest.corner)}">
-      <div class="date">${cornerTag(latest.corner)}<span>${isToday ? "오늘" : "가장 최근 글"} · ${esc(fmtD(latest.publish_date))}</span><span>${latest.reading_min}분</span></div>
-      <h1><a href="#/a/${esc(latest.slug)}">${esc(latest.title)}</a></h1>
-      ${latest.subtitle ? `<p class="sub">${esc(latest.subtitle)}</p>` : ""}
-      ${latest.summary?.length ? `<ol class="summary">${latest.summary.map(s => `<li>${esc(s)}</li>`).join("")}</ol>` : ""}
-      <a class="btn" href="#/a/${esc(latest.slug)}">${isRead ? "다시 읽기" : "읽으러 가기"}</a>
-    </article>`;
+    const d0 = latest.publish_date, isToday = d0 === today;
+    const arts = days2.get(d0) || [latest];
+    const main = arts[0], rest = arts.slice(1);
+    lead = `<div class="leads"><article class="lead" data-corner="${esc(main.corner)}">
+      <div class="date">${cornerTag(main.corner)}<span>${isToday ? "오늘" : "가장 최근 글"} · ${esc(fmtD(d0))}</span><span>${main.reading_min}분</span></div>
+      <h1><a href="#/a/${esc(main.slug)}">${esc(main.title)}</a></h1>
+      ${main.subtitle ? `<p class="sub">${esc(main.subtitle)}</p>` : ""}
+      ${main.summary?.length ? `<ol class="summary">${main.summary.map(x => `<li>${esc(x)}</li>`).join("")}</ol>` : ""}
+      <a class="btn" href="#/a/${esc(main.slug)}">${read.has(main.slug) ? "다시 읽기" : "읽으러 가기"}</a>
+    </article>${rest.map(r => `<a class="lead2" data-corner="${esc(r.corner)}" href="#/a/${esc(r.slug)}">
+      <div class="date">${cornerTag(r.corner)}<span>${isToday ? "오늘의 두 번째 글" : "함께 올라온 글"}</span><span>${r.reading_min}분</span>${read.has(r.slug) ? `<span class="readmark">읽음</span>` : ""}</div>
+      <h2>${esc(r.title)}</h2>${r.subtitle ? `<p>${esc(r.subtitle)}</p>` : ""}</a>`).join("")}</div>`;
   }
 
   // 이번 주
@@ -475,10 +529,14 @@ async function pageHome(){
       <div class="phase">${esc(weekRange(anchor))}</div>
       <h2>${today < CONFIG.COURSE_START ? "첫 주 데일리 리딩" : "이번 주 데일리 리딩"}</h2>
       <ul class="weeklist">${days.map(d => {
-        const a = byDate.get(d);
-        if(a) return `<li><a href="#/a/${esc(a.slug)}"><span class="dow">${dowOf(d)} ${fmtShort(d)}</span><span class="t">${esc(a.title)}</span>${read.has(a.slug) ? `<span class="readmark">읽음</span>` : "<span></span>"}</a></li>`;
-        const c = Object.entries(CORNERS).find(([,v]) => v.dow === dowOf(d));
-        return `<li><div class="slot"><span class="dow">${dowOf(d)} ${fmtShort(d)}</span><span class="t">${c ? esc(c[1].name) : ""}${d > today ? " · 예정" : ""}</span><span></span></div></li>`;
+        const arts = days2.get(d) || [];
+        const want = ["concept", cornerOfDay(d)].filter(Boolean);
+        const items = want.map(c => {
+          const a = arts.find(x => x.corner === c);
+          if(a) return `<a class="wi" data-corner="${esc(c)}" href="#/a/${esc(a.slug)}"><span class="t">${esc(a.title)}</span>${read.has(a.slug) ? `<span class="readmark">읽음</span>` : ""}</a>`;
+          return `<span class="wi slot" data-corner="${esc(c)}"><span class="t">${esc(CORNERS[c].name)}${d > today ? " · 예정" : ""}</span></span>`;
+        }).join("");
+        return `<li><span class="dow">${dowOf(d)} ${fmtShort(d)}</span><div class="wis">${items}</div></li>`;
       }).join("")}</ul>
     </aside>`;
   }
@@ -493,7 +551,8 @@ function progressHtml(holidays, list, read, today){
   const idx = new Map(days.map((d,i) => [d, i+1]));
   const passed = days.filter(d => d <= today).length;
   const hol = new Map(holidays.map(h => [h.holiday_date, h]));
-  const byDate = new Map(); list.forEach(a => { if(!byDate.has(a.publish_date)) byDate.set(a.publish_date, a); });
+  const byDate = new Map(); dayMap(list).forEach((v, k) => byDate.set(k, v[0]));
+  const dayCount = dayMap(list);
 
   // 큰 숫자
   let big, meta;
@@ -549,8 +608,8 @@ function progressHtml(holidays, list, read, today){
       }
       classN++;
       const a = byDate.get(d);
-      const cls = ["cell","class", d < today && "past", d === today && "is-today", a && "has", a && read.has(a.slug) && "read"].filter(Boolean).join(" ");
-      const label = `${fmtD(d)} · ${idx.get(d)}일차${a ? " · " + a.title : ""}`;
+      const cls = ["cell","class", d < today && "past", d === today && "is-today", a && "has", a && (dayCount.get(d)||[]).every(x => read.has(x.slug)) && "read"].filter(Boolean).join(" ");
+      const label = `${fmtD(d)} · ${idx.get(d)}일차${a ? " · " + (dayCount.get(d)||[]).map(x => x.title).join(" / ") : ""}`;
       const inner = `${num}<span class="n">${idx.get(d)}일차</span>`;
       cells += a ? `<a class="${cls}" href="#/a/${esc(a.slug)}" title="${esc(label)}" aria-label="${esc(label)}">${inner}</a>`
                  : `<span class="${cls}" title="${esc(label)}">${inner}</span>`;
@@ -605,7 +664,8 @@ async function pageArchive(params){
     const rows = list.filter(a =>
       (!archiveState.corner || a.corner === archiveState.corner) &&
       (!archiveState.month || a.publish_date.startsWith(archiveState.month)) &&
-      (!term || [a.title, a.subtitle, ...(a.tags||[]), ...(a.summary||[])].join(" ").toLowerCase().includes(term)));
+      (!term || [a.title, a.subtitle, ...(a.tags||[]), ...(a.summary||[])].join(" ").toLowerCase().includes(term)))
+      .sort((x,y) => x.publish_date === y.publish_date ? rankOf(x.corner) - rankOf(y.corner) : (x.publish_date < y.publish_date ? 1 : -1));
     if(!list.length){ res.innerHTML = `<div class="empty"><strong>아직 올라온 글이 없어요</strong>첫 글은 ${esc(fmtD(CONFIG.COURSE_START))} 아침에 올라옵니다.</div>`; return; }
     if(!rows.length){ res.innerHTML = `<div class="empty"><strong>조건에 맞는 글이 없어요</strong>필터를 줄이거나 다른 키워드로 찾아보세요.</div>`; return; }
     let html = "", cur = null;

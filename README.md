@@ -32,7 +32,7 @@ with a as (
   values (
     'w01-mon-financial-market',          -- 영소문자·숫자·하이픈
     '2026-11-02', 1,
-    'concept',                           -- concept(월) job(화) code(수) issue(목) paper(금)
+    'concept',                           -- concept(매일) + chart(월) job(화) code(수) issue(목) paper(금), 날짜·코너 조합은 유일
     '제목', '부제',
     array['요약 1','요약 2','요약 3'],
     $md$ 마크다운 본문. 수식은 $x$ 또는 $$x$$, 코드는 ```python 블록 $md$,
