@@ -127,31 +127,45 @@ h2{font-size:21px;margin:0 0 14px;font-weight:700}
 .weeklist a:hover .t{text-decoration:underline}
 .readmark{font-size:12px;color:var(--rise);font-weight:600}
 
-/* 학습 차트 */
-.chart{margin-top:44px;background:var(--sheet);border:1px solid var(--rule);border-radius:14px;padding:22px 24px 18px}
-.chart-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 20px;margin-bottom:16px}
-.chart-head h2{margin:0}
-.stat{display:flex;gap:22px;font-size:14px;color:var(--ink-2)}
-.stat strong{font:600 22px/1 var(--mono);color:var(--ink);display:block;margin-bottom:4px}
-.stat .up strong{color:var(--rise)}
-.bars{display:flex;align-items:flex-end;height:120px;gap:2px;position:relative}
-.wk{display:flex;align-items:flex-end;gap:2px;flex:var(--n) 1 0;min-width:0;height:100%;padding-right:3px;position:relative}
-.wk + .wk{border-left:1px dashed transparent}
-.wk.phase-start{border-left:1px solid var(--rule);padding-left:3px}
-.bar{flex:1 1 0;min-width:1px;border-radius:2px 2px 0 0;background:transparent;box-shadow:inset 0 0 0 1px var(--rule);height:30%;padding:0;border:0;position:relative}
-.bar.pub{background:var(--ink-3);box-shadow:none;height:var(--h)}
-.bar.read{background:var(--rise)}
-.bar.today{outline:2px solid var(--ink);outline-offset:1px}
-@media (max-width:640px){.bar.today{outline-width:1px}.lead{padding:22px 20px}.chart{padding:18px 16px 14px}}
-.bar.pub:hover,.bar.pub:focus-visible{background:var(--ink)}
-.bar.read:hover{background:color-mix(in srgb,var(--rise) 75%,var(--ink))}
-.bar:not(.pub){cursor:default}
-.phases{display:flex;gap:2px;margin-top:8px;font-size:12px;color:var(--ink-3)}
-.phases span{flex:var(--n) 1 0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-left:3px}
-.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:13px;color:var(--ink-2)}
-.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
-.tip{position:fixed;z-index:20;pointer-events:none;background:var(--ink);color:var(--paper);font-size:13px;line-height:1.45;padding:7px 10px;border-radius:6px;max-width:260px;opacity:0;transition:opacity .12s}
-.tip.on{opacity:1}
+/* 과정 진도 + 달력 */
+.progress{margin-top:44px;background:var(--sheet);border:1px solid var(--rule);border-radius:14px;padding:24px 26px 22px}
+.prog-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:10px 24px;margin-bottom:16px}
+.prog-head h2{margin:0 0 6px;font-size:15px;color:var(--ink-2);font-weight:600}
+.dayno{font-family:var(--serif);font-weight:700;font-size:clamp(34px,5vw,46px);line-height:1;letter-spacing:-.02em}
+.dayno small{font:500 17px var(--sans);color:var(--ink-3);margin-left:6px;letter-spacing:0}
+.prog-meta{font-size:14px;color:var(--ink-2);text-align:right}
+.prog-meta strong{color:var(--ink)}
+.track{display:flex;gap:3px;height:12px}
+.seg{flex:var(--n) 1 0;min-width:0;background:var(--rule);border-radius:3px;overflow:hidden;position:relative}
+.seg i{position:absolute;inset:0 auto 0 0;width:var(--f);background:var(--rise)}
+.seglabels{display:flex;gap:3px;margin-top:7px;font-size:12px;color:var(--ink-3)}
+.seglabels span{flex:var(--n) 1 0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seglabels span.cur{color:var(--ink);font-weight:600}
+.months{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:22px 26px;margin-top:28px}
+.month h3{font-size:15px;margin:0 0 8px;display:flex;justify-content:space-between;align-items:baseline}
+.month h3 small{font-weight:400;font-size:12px;color:var(--ink-3)}
+.mgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px;align-content:start}
+.mgrid .dh{font-size:11.5px;color:var(--ink-3);text-align:center;padding-bottom:2px}
+.cell{position:relative;height:42px;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;font:500 14px/1 var(--mono);text-decoration:none;color:var(--ink);border:1px solid transparent}
+.cell .n{font-size:9.5px;font-family:var(--sans);color:var(--ink-3);margin-top:3px;font-weight:500;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:clip}
+.cell.out{color:var(--ink-3);opacity:.35}
+.cell.blank{visibility:hidden}
+.cell.class{background:var(--paper)}
+.cell.past{background:color-mix(in srgb,var(--rise) 16%,var(--paper))}
+.cell.past .n{color:var(--ink-2)}
+.cell.is-today{background:var(--rise);color:#fff}
+.cell.is-today .n{color:#fff}
+.cell.hol{color:var(--rise)}
+.cell.hol .n{color:var(--rise)}
+.cell.off{background:repeating-linear-gradient(135deg,transparent 0 4px,var(--rule) 4px 5px);color:var(--ink-2)}
+.cell.off .n{color:var(--ink-2)}
+.cell.has::after{content:"";position:absolute;top:5px;right:5px;width:5px;height:5px;border-radius:50%;background:var(--ink-3)}
+.cell.has.read::after{background:var(--c-code)}
+.cell.is-today.has::after{background:#fff}
+a.cell:hover{border-color:var(--ink-3)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:22px;font-size:13px;color:var(--ink-2);align-items:center}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:6px;vertical-align:-2px;border:1px solid var(--rule)}
+@media (max-width:640px){.lead{padding:22px 20px}.progress{padding:20px 16px}.prog-meta{text-align:left}}
 
 /* 글 목록 */
 .filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:22px}
@@ -295,7 +309,6 @@ footer button{background:none;border:0;padding:0;color:var(--ink-2);text-decorat
     <button type="button" id="themeBtn">화면 밝기 바꾸기</button>
   </div>
 </footer>
-<div class="tip" id="tip" role="tooltip"></div>
 
 <script>
 /* ================= 설정 ================= */
@@ -346,7 +359,7 @@ const LIST_COLS = "id,slug,publish_date,week_no,corner,title,subtitle,summary,ta
 const cache = {};
 const once = (k, f) => cache[k] ??= f().catch(e => { delete cache[k]; throw e; });
 const getWeeks    = () => once("weeks", () => api("daily_weeks?select=*&order=week_no"));
-const getHolidays = () => once("hol",   () => api("daily_holidays?select=*"));
+const getHolidays = () => once("hol",   () => api("daily_holidays?select=*&order=holiday_date"));
 const getJobs     = () => once("jobs",  () => api("daily_jobs?select=*&order=sort_order"));
 const getList     = () => once("list",  () => api(`daily_articles?select=${LIST_COLS}&order=publish_date.desc,id.desc`));
 const getTerms    = () => once("terms", () => api("daily_terms?select=id,term,term_en,definition,article_id&order=term"));
@@ -431,66 +444,104 @@ async function pageHome(){
     </aside>`;
   }
 
-  $app.innerHTML = `<div class="course"><strong>빅데이터를 활용한 디지털금융 전문가 과정</strong><span>K-Digital Training · 2026.10.30 – 2027.04.16 · 수업 전 7분 데일리 리딩</span></div><div class="today">${lead}${weekHtml}</div>${chartHtml(weeks, holidays, list, read, today)}`;
-  bindChart();
+  $app.innerHTML = `<div class="course"><strong>빅데이터를 활용한 디지털금융 전문가 과정</strong><span>K-Digital Training · 2026.10.30 – 2027.04.16 · 수업 전 7분 데일리 리딩</span></div><div class="today">${lead}${weekHtml}</div>${progressHtml(weeks, holidays, list, read, today)}`;
 }
 
-/* 학습 차트: 과정 전체 평일을 막대 하나씩 */
-function chartHtml(weeks, holidays, list, read, today){
+/* 과정 진도 + 달력 */
+function progressHtml(weeks, holidays, list, read, today){
   const days = courseDays(holidays);
-  const byDate = new Map(); list.forEach(a => { if(!byDate.has(a.publish_date)) byDate.set(a.publish_date, a); });
-  const published = list.length;
-  const readCount = list.filter(a => read.has(a.slug)).length;
+  const total = days.length;
+  const idx = new Map(days.map((d,i) => [d, i+1]));
   const passed = days.filter(d => d <= today).length;
-  let prevPhase = null;
-  const wkHtml = weeks.map(w => {
-    const wd = days.filter(d => d >= w.start_date && d <= w.end_date);
-    const start = w.phase !== prevPhase; prevPhase = w.phase;
-    const bars = wd.map(d => {
-      const a = byDate.get(d);
-      const cls = ["bar", a && "pub", a && read.has(a.slug) && "read", d === today && "today"].filter(Boolean).join(" ");
-      const h = a ? 40 + Math.min(60, (a.reading_min||6) * 7) : 30;
-      const label = a ? `${fmtD(d)} · ${a.title}${read.has(a.slug) ? " (읽음)" : ""}` : `${fmtD(d)} · ${d > today ? "예정" : "글 없음"}`;
-      return a
-        ? `<a class="${cls}" style="--h:${h}%" href="#/a/${esc(a.slug)}" data-tip="${esc(label)}" aria-label="${esc(label)}"></a>`
-        : `<span class="${cls}" data-tip="${esc(label)}"></span>`;
-    }).join("");
-    return `<div class="wk${start ? " phase-start" : ""}" style="--n:${Math.max(wd.length,1)}">${bars}</div>`;
-  }).join("");
-  // 단계 라벨
+  const hol = new Map(holidays.map(h => [h.holiday_date, h]));
+  const byDate = new Map(); list.forEach(a => { if(!byDate.has(a.publish_date)) byDate.set(a.publish_date, a); });
+  const curWeek = weekOf(weeks, today);
+
+  // 큰 숫자
+  let big, meta;
+  if(today < CONFIG.COURSE_START){
+    const dd = Math.round((parseD(CONFIG.COURSE_START) - parseD(today)) / 864e5);
+    big = `개강 D-${dd}<small>총 ${total}일</small>`;
+    meta = `${esc(fmtD(CONFIG.COURSE_START))} 개강`;
+  } else if(today > CONFIG.COURSE_END){
+    big = `수료<small>${total}일 완주</small>`;
+    meta = `${esc(fmtD(CONFIG.COURSE_END))} 수료`;
+  } else {
+    const isClass = idx.has(today);
+    big = isClass ? `${idx.get(today)}일차<small>/ ${total}일</small>` : `${passed}일 지남<small>/ ${total}일</small>`;
+    const h = hol.get(today);
+    meta = `${h ? `오늘은 ${esc(h.kind)}(${esc(h.name)}) · ` : (!isClass ? "오늘은 수업이 없는 날 · " : "")}남은 수업일 <strong>${total - passed}일</strong>${curWeek ? `<br>${curWeek.week_no}주차 · ${esc(curWeek.phase)}` : ""}`;
+  }
+
+  // 단계별 진행 막대
   const phases = [];
   weeks.forEach(w => {
-    const n = days.filter(d => d >= w.start_date && d <= w.end_date).length;
+    const wd = days.filter(d => d >= w.start_date && d <= w.end_date);
     const last = phases[phases.length-1];
-    if(last && last.p === w.phase) last.n += n; else phases.push({p:w.phase, n});
+    if(last && last.p === w.phase){ last.n += wd.length; last.done += wd.filter(d => d <= today).length; }
+    else phases.push({p:w.phase, n:wd.length, done:wd.filter(d => d <= today).length});
   });
-  return `<section class="chart" aria-label="나의 학습 차트">
-    <div class="chart-head">
-      <h2>나의 학습 차트</h2>
-      <div class="stat">
-        <div class="up"><strong>${readCount}</strong>읽은 글</div>
-        <div><strong>${published}</strong>올라온 글</div>
-        <div><strong>${passed}<span class="small muted">/${days.length}</span></strong>지나간 수업일</div>
-      </div>
+  const track = phases.map(p => `<div class="seg" style="--n:${p.n}"><i style="--f:${p.n ? (p.done/p.n*100).toFixed(1) : 0}%"></i></div>`).join("");
+  const labels = phases.map(p => `<span style="--n:${p.n}" class="${curWeek && curWeek.phase === p.p ? "cur" : ""}">${esc(p.p)}</span>`).join("");
+
+  // 달력 (월~금)
+  const months = [];
+  for(let m = CONFIG.COURSE_START.slice(0,7); m <= CONFIG.COURSE_END.slice(0,7); ){
+    months.push(m);
+    const [y, mm] = m.split("-").map(Number);
+    m = mm === 12 ? `${y+1}-01` : `${y}-${String(mm+1).padStart(2,"0")}`;
+  }
+  const cal = months.map(m => {
+    const [y, mm] = m.split("-").map(Number);
+    const first = `${m}-01`;
+    const last = new Date(Date.UTC(y, mm, 0)).toISOString().slice(0,10);
+    // 월~금 주 단위로 줄을 만들고, 과정 기간과 겹치지 않는 줄은 뺀다
+    const rows = []; let row = null;
+    for(let d = first; d <= last; d = addDays(d,1)){
+      const w = parseD(d).getUTCDay();
+      if(w === 0 || w === 6) continue;
+      if(!row || w === 1){ row = new Array(5).fill(null); rows.push(row); }
+      row[w-1] = d;
+    }
+    let cells = "", classN = 0;
+    rows.filter(r => r.some(d => d && d >= CONFIG.COURSE_START && d <= CONFIG.COURSE_END)).forEach(r => r.forEach(d => {
+      if(!d){ cells += `<span class="cell blank"></span>`; return; }
+      const num = parseD(d).getUTCDate();
+      const h = hol.get(d);
+      if(d < CONFIG.COURSE_START || d > CONFIG.COURSE_END){ cells += `<span class="cell out">${num}</span>`; return; }
+      if(h){
+        cells += `<span class="cell ${h.kind === "휴강" ? "off" : "hol"}" title="${esc(fmtD(d))} · ${esc(h.kind)} (${esc(h.name)})" aria-label="${esc(fmtD(d))} ${esc(h.kind)}">${num}<span class="n">${esc(h.kind)}</span></span>`;
+        return;
+      }
+      classN++;
+      const a = byDate.get(d);
+      const cls = ["cell","class", d < today && "past", d === today && "is-today", a && "has", a && read.has(a.slug) && "read"].filter(Boolean).join(" ");
+      const label = `${fmtD(d)} · ${idx.get(d)}일차${a ? " · " + a.title : ""}`;
+      const inner = `${num}<span class="n">${idx.get(d)}일차</span>`;
+      cells += a ? `<a class="${cls}" href="#/a/${esc(a.slug)}" title="${esc(label)}" aria-label="${esc(label)}">${inner}</a>`
+                 : `<span class="${cls}" title="${esc(label)}">${inner}</span>`;
+    }));
+    return `<div class="month"><h3>${y}년 ${mm}월<small>수업 ${classN}일</small></h3>
+      <div class="mgrid"><span class="dh">월</span><span class="dh">화</span><span class="dh">수</span><span class="dh">목</span><span class="dh">금</span>${cells}</div></div>`;
+  }).join("");
+
+  return `<section class="progress" aria-label="과정 진도">
+    <div class="prog-head">
+      <div><h2>과정 진도</h2><div class="dayno">${big}</div></div>
+      <div class="prog-meta">${meta}</div>
     </div>
-    <div class="bars">${wkHtml}</div>
-    <div class="phases" aria-hidden="true">${phases.map(p => `<span style="--n:${p.n}">${esc(p.p)}</span>`).join("")}</div>
-    <div class="legend"><span><i style="background:var(--rise)"></i>읽은 날</span><span><i style="background:var(--ink-3)"></i>안 읽은 글</span><span><i style="box-shadow:inset 0 0 0 1px var(--rule)"></i>예정</span><span>읽음 기록은 이 기기의 브라우저에만 저장돼요</span></div>
+    <div class="track" role="img" aria-label="전체 ${total}일 중 ${passed}일 진행">${track}</div>
+    <div class="seglabels" aria-hidden="true">${labels}</div>
+    <div class="months">${cal}</div>
+    <div class="legend">
+      <span><i style="background:color-mix(in srgb,var(--rise) 16%,var(--paper))"></i>지난 수업일</span>
+      <span><i style="background:var(--rise);border-color:var(--rise)"></i>오늘</span>
+      <span><i style="background:var(--paper)"></i>남은 수업일</span>
+      <span><i style="background:transparent;border-color:var(--rise)"></i>공휴일</span>
+      <span><i style="background:repeating-linear-gradient(135deg,transparent 0 3px,var(--rule) 3px 4px)"></i>휴강</span>
+      <span>점이 있는 날은 글이 있어요. 눌러서 읽을 수 있어요.</span>
+    </div>
   </section>`;
-}
-function bindChart(){
-  const tip = document.getElementById("tip");
-  $app.querySelectorAll(".bar").forEach(b => {
-    const show = e => {
-      tip.textContent = b.dataset.tip; tip.classList.add("on");
-      const r = b.getBoundingClientRect();
-      const x = Math.min(window.innerWidth - tip.offsetWidth - 8, Math.max(8, r.left + r.width/2 - tip.offsetWidth/2));
-      tip.style.left = x + "px"; tip.style.top = (r.top - tip.offsetHeight - 10) + "px";
-    };
-    const hide = () => tip.classList.remove("on");
-    b.addEventListener("mouseenter", show); b.addEventListener("focus", show);
-    b.addEventListener("mouseleave", hide); b.addEventListener("blur", hide);
-  });
 }
 
 /* ================= 페이지: 지난 글 ================= */
@@ -695,7 +746,6 @@ async function route(){
     if(a.dataset.nav === section) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
   });
   document.title = "하루 7분 금융×데이터 | 빅데이터를 활용한 디지털금융 전문가 과정 – 유비온 디지털교육센터";
-  document.getElementById("tip").classList.remove("on");
   $app.innerHTML = loading();
   window.scrollTo(0,0);
   try{

@@ -15,7 +15,7 @@
 | 테이블 | 용도 |
 |---|---|
 | `daily_weeks` | 1~24주차 테마, 주제, 금요일 논문 후보(`paper_hint`) |
-| `daily_holidays` | 발행하지 않는 공휴일 |
+| `daily_holidays` | 수업이 없는 날 (kind: 공휴일 · 휴강). 글을 발행하지 않음 |
 | `daily_jobs` | 직무 지도 카드 (`slug`로 글과 연결) |
 | `daily_articles` | 글 본문 |
 | `daily_terms` | 용어사전 (글에 연결) |
