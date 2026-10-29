@@ -56,6 +56,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
 
 /* 상단 */
+.ainote{margin:0;padding:6px 16px;text-align:center;font-size:13px;line-height:1.5;background:color-mix(in srgb,var(--c-issue) 14%,var(--sheet));color:var(--ink);border-bottom:1px solid color-mix(in srgb,var(--c-issue) 30%,var(--rule))}
+@media (max-width:640px){.ainote{font-size:12px;padding:5px 12px}}
 .top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule)}
 .top .wrap{display:flex;align-items:center;gap:20px;height:66px}
 .brand{display:flex;flex-direction:column;text-decoration:none;white-space:nowrap;line-height:1.25}
@@ -232,7 +234,7 @@ select.search{flex:0 1 200px}
 .sources{padding-left:20px;margin:0}
 .sources li{margin:4px 0;font-size:15px}
 .sources a{color:var(--fall)}
-.side{position:sticky;top:84px;align-self:start;display:grid;gap:22px;font-size:14px}
+.side{position:sticky;top:116px;align-self:start;display:grid;gap:22px;font-size:14px}
 @media (max-width:900px){.side{position:static}}
 .side h3{font-size:13px;color:var(--ink-3);font-weight:500;margin:0 0 6px}
 .side .tags{display:flex;flex-wrap:wrap;gap:6px}
@@ -297,7 +299,7 @@ ul.proj li::marker{color:var(--c-paper)}
 ol.qs{padding-left:0!important;list-style:none;counter-reset:q}
 ol.qs li{counter-increment:q;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:12px 16px 12px 48px;position:relative;margin:8px 0!important}
 ol.qs li::before{content:"Q" counter(q);position:absolute;left:14px;top:12px;font:600 14px var(--mono);color:var(--c-job)}
-.jside{display:grid;gap:26px;align-content:start;position:sticky;top:84px}
+.jside{display:grid;gap:26px;align-content:start;position:sticky;top:116px}
 @media (max-width:900px){.jside{position:static}}
 .jside section{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:16px 18px}
 .jside h3{font-size:14px;margin:0 0 10px;color:var(--ink-2);font-weight:600}
@@ -328,6 +330,7 @@ footer button{background:none;border:0;padding:0;color:var(--ink-2);text-decorat
 </head>
 <body>
 <header class="top">
+  <p class="ainote" role="note">이 사이트의 모든 글은 생성형 AI로 작성되었습니다. 정확한 내용은 꼭 원문과 공식 자료로 다시 확인하세요.</p>
   <div class="wrap">
     <a class="brand" href="#/"><span class="org">유비온 디지털교육센터 · <em>K-Digital Training</em></span><span class="name">하루 7분 <b>금융×데이터</b></span></a>
     <nav class="nav" aria-label="주요 메뉴">
