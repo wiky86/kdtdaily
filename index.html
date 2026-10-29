@@ -255,9 +255,9 @@ select.search{flex:0 1 200px}
 .glossary dd a{font-size:13px;color:var(--fall)}
 
 /* 직무 */
-.jobs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden}
-.job{background:var(--sheet);padding:20px 20px 22px;text-decoration:none;display:block}
-.job:hover{background:var(--paper)}
+.jobs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.job{background:var(--sheet);padding:20px 20px 22px;text-decoration:none;display:block;border:1px solid var(--rule);border-radius:12px}
+.job:hover{border-color:var(--ink-3)}
 .job h3{font-family:var(--serif);font-size:19px;margin:0 0 6px}
 .job p{margin:0 0 12px;color:var(--ink-2);font-size:15px}
 .job .where{font-size:13px;color:var(--ink-3)}
@@ -265,19 +265,56 @@ select.search{flex:0 1 200px}
 .jobdetail h2{font-size:15px;color:var(--ink-2);margin:0 0 8px;font-weight:600}
 .jobdetail ul{margin:0;padding-left:20px}
 .jobdetail li{margin:3px 0}
-.weeklinks{display:flex;flex-wrap:wrap;gap:6px}
-.weeklinks a{font:500 13px var(--mono);text-decoration:none;border:1px solid var(--rule);border-radius:6px;padding:2px 8px}
 
-/* 커리큘럼 */
-.curri{list-style:none;margin:0;padding:0}
-.curri li{display:grid;grid-template-columns:76px 150px minmax(0,1fr);gap:16px;padding:14px 2px;border-top:1px solid var(--rule)}
-.curri li.now{background:var(--sheet);box-shadow:inset 3px 0 0 var(--rise)}
-.curri .no{font:600 15px var(--mono)}
-.curri .dates{font:400 13px/1.7 var(--mono);color:var(--ink-3)}
-.curri h3{margin:0 0 4px;font-size:17px}
-.curri .ph{font-size:13px;color:var(--ink-3)}
-.curri p{margin:4px 0 0;font-size:14px;color:var(--ink-2)}
-@media (max-width:640px){.curri li{grid-template-columns:56px minmax(0,1fr)}.curri .dates{grid-column:2}}
+.jtags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.jtags span{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--paper);border:1px solid var(--rule);color:var(--ink-2)}
+.cmpwrap{overflow-x:auto;border:1px solid var(--rule);border-radius:12px;background:var(--sheet)}
+.cmp{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+.cmp th,.cmp td{padding:10px 12px;border-bottom:1px solid var(--rule);text-align:center;white-space:nowrap}
+.cmp thead th{font-weight:600;color:var(--ink-2);font-size:13px}
+.cmp tbody th{text-align:left;font-weight:600}
+.cmp tbody th a{text-decoration:none}
+.cmp tbody th a:hover{text-decoration:underline}
+.cmp tr:last-child th,.cmp tr:last-child td{border-bottom:0}
+.dots{display:inline-flex;gap:3px;vertical-align:middle}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--rule)}
+.dots i.on{background:var(--c-job)}
+.jobpage{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:48px}
+@media (max-width:900px){.jobpage{grid-template-columns:1fr;gap:28px}}
+.jmain section{margin-bottom:34px}
+.jmain h2{font-size:19px;margin:0 0 12px}
+.jmain ul,.jmain ol{margin:0;padding-left:22px}
+.jmain li{margin:5px 0}
+.jintro{font-family:var(--serif);font-size:19px;line-height:1.75;margin:0 0 36px;max-width:62ch}
+.timeline{list-style:none;padding:0!important;border-left:2px solid var(--rule);margin-left:4px!important}
+.timeline li{display:grid;grid-template-columns:62px 1fr;gap:10px;padding:6px 0 6px 18px;position:relative;margin:0!important}
+.timeline li::before{content:"";position:absolute;left:-6px;top:14px;width:10px;height:10px;border-radius:50%;background:var(--sheet);border:2px solid var(--c-job)}
+.timeline time{font:500 14px var(--mono);color:var(--ink-2)}
+ul.checks{list-style:none;padding:0!important}
+ul.checks li{padding-left:26px;position:relative}
+ul.checks li::before{content:"";position:absolute;left:2px;top:7px;width:13px;height:13px;border:1.5px solid var(--c-code);border-radius:3px}
+ul.proj li::marker{color:var(--c-paper)}
+ol.qs{padding-left:0!important;list-style:none;counter-reset:q}
+ol.qs li{counter-increment:q;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:12px 16px 12px 48px;position:relative;margin:8px 0!important}
+ol.qs li::before{content:"Q" counter(q);position:absolute;left:14px;top:12px;font:600 14px var(--mono);color:var(--c-job)}
+.jside{display:grid;gap:26px;align-content:start;position:sticky;top:84px}
+@media (max-width:900px){.jside{position:static}}
+.jside section{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:16px 18px}
+.jside h3{font-size:14px;margin:0 0 10px;color:var(--ink-2);font-weight:600}
+.jside ul{margin:0;padding-left:18px;font-size:15px}
+.jside li{margin:3px 0}
+.skills{margin:0;display:grid;gap:8px}
+.skills div{display:grid;grid-template-columns:96px 1fr;align-items:center;font-size:14px}
+.skills dt{color:var(--ink)}
+.skills dd{margin:0;display:flex;align-items:center;gap:8px}
+.skills dd span:last-child{font-size:12px;color:var(--ink-3)}
+ol.path{list-style:none;padding:0;margin:0;font-size:15px}
+ol.path li{padding:6px 0 6px 22px;position:relative}
+ol.path li::before{content:"";position:absolute;left:4px;top:13px;width:8px;height:8px;border-radius:50%;background:var(--c-job)}
+ol.path li + li::after{content:"";position:absolute;left:7px;top:-6px;height:18px;border-left:2px solid var(--rule)}
+.sims{display:flex;flex-wrap:wrap;gap:6px}
+.sims a{font-size:14px;text-decoration:none;border:1px solid var(--rule);border-radius:999px;padding:3px 10px}
+.sims a:hover{border-color:var(--ink-3)}
 
 .empty{border:1px dashed var(--rule);border-radius:14px;padding:40px 28px;text-align:center;color:var(--ink-2)}
 .empty strong{display:block;color:var(--ink);font-family:var(--serif);font-size:22px;margin-bottom:6px}
@@ -298,7 +335,6 @@ footer button{background:none;border:0;padding:0;color:var(--ink-2);text-decorat
       <a href="#/archive" data-nav="archive">지난 글</a>
       <a href="#/terms" data-nav="terms">용어사전</a>
       <a href="#/jobs" data-nav="jobs">직무 지도</a>
-      <a href="#/weeks" data-nav="weeks">커리큘럼</a>
     </nav>
   </div>
 </header>
@@ -358,7 +394,6 @@ async function api(path){
 const LIST_COLS = "id,slug,publish_date,week_no,corner,title,subtitle,summary,tags,reading_min,related_job";
 const cache = {};
 const once = (k, f) => cache[k] ??= f().catch(e => { delete cache[k]; throw e; });
-const getWeeks    = () => once("weeks", () => api("daily_weeks?select=*&order=week_no"));
 const getHolidays = () => once("hol",   () => api("daily_holidays?select=*&order=holiday_date"));
 const getJobs     = () => once("jobs",  () => api("daily_jobs?select=*&order=sort_order"));
 const getList     = () => once("list",  () => api(`daily_articles?select=${LIST_COLS}&order=publish_date.desc,id.desc`));
@@ -390,7 +425,8 @@ function highlight(root){
 const cornerTag = c => `<span class="corner" data-corner="${esc(c)}">${esc(CORNERS[c]?.name || c)}</span>`;
 const loading = () => `<div aria-busy="true" aria-label="불러오는 중"><div class="skeleton" style="width:30%"></div><div class="skeleton" style="width:70%;height:30px"></div><div class="skeleton"></div><div class="skeleton" style="width:85%"></div></div>`;
 const errorBox = e => `<div class="empty err" role="alert"><strong>글을 불러오지 못했어요</strong>네트워크 연결을 확인한 뒤 새로고침해 주세요.<br><span class="small">(${esc(e.message).slice(0,140)})</span></div>`;
-const weekOf = (weeks, date) => weeks.find(w => date >= w.start_date && date <= w.end_date);
+const mondayOf = d => { const w = parseD(d).getUTCDay(); return addDays(d, w === 0 ? -6 : 1 - w); };
+const weekRange = d => { const m = mondayOf(d); const a = m < CONFIG.COURSE_START ? CONFIG.COURSE_START : m; const f = addDays(m, 4); const b = f > CONFIG.COURSE_END ? CONFIG.COURSE_END : f; return a === b ? fmtShort(a) : `${fmtShort(a)} – ${fmtShort(b)}`; };
 
 function courseDays(holidays){
   const hol = new Set(holidays.map(h => h.holiday_date));
@@ -404,11 +440,12 @@ function courseDays(holidays){
 
 /* ================= 페이지: 오늘 ================= */
 async function pageHome(){
-  const [weeks, holidays, list] = await Promise.all([getWeeks(), getHolidays(), getList()]);
+  const [holidays, list] = await Promise.all([getHolidays(), getList()]);
   const today = todayKST();
   const read = readSet();
   const latest = list[0];
-  const week = weekOf(weeks, today) || (today < CONFIG.COURSE_START ? weeks[0] : weeks[weeks.length-1]);
+  const anchor = today < CONFIG.COURSE_START ? CONFIG.COURSE_START : (today > CONFIG.COURSE_END ? CONFIG.COURSE_END : today);
+  const wkMon = mondayOf(anchor), wkFri = addDays(wkMon, 4);
   const byDate = new Map(); list.forEach(a => { if(!byDate.has(a.publish_date)) byDate.set(a.publish_date, a); });
 
   // 오늘의 글
@@ -429,12 +466,11 @@ async function pageHome(){
 
   // 이번 주
   let weekHtml = "";
-  if(week){
-    const days = courseDays(holidays).filter(d => d >= week.start_date && d <= week.end_date);
+  {
+    const days = courseDays(holidays).filter(d => d >= wkMon && d <= wkFri);
     weekHtml = `<aside class="weekbox" aria-label="이번 주">
-      <div class="phase">${week.week_no}주차 · ${esc(week.phase)}</div>
-      <h2>${esc(week.theme)}</h2>
-      <ul class="topics">${(week.topics||[]).map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+      <div class="phase">${esc(weekRange(anchor))}</div>
+      <h2>${today < CONFIG.COURSE_START ? "첫 주 데일리 리딩" : "이번 주 데일리 리딩"}</h2>
       <ul class="weeklist">${days.map(d => {
         const a = byDate.get(d);
         if(a) return `<li><a href="#/a/${esc(a.slug)}"><span class="dow">${dowOf(d)} ${fmtShort(d)}</span><span class="t">${esc(a.title)}</span>${read.has(a.slug) ? `<span class="readmark">읽음</span>` : "<span></span>"}</a></li>`;
@@ -444,18 +480,17 @@ async function pageHome(){
     </aside>`;
   }
 
-  $app.innerHTML = `<div class="course"><strong>빅데이터를 활용한 디지털금융 전문가 과정</strong><span>K-Digital Training · 2026.10.30 – 2027.04.16 · 수업 전 7분 데일리 리딩</span></div><div class="today">${lead}${weekHtml}</div>${progressHtml(weeks, holidays, list, read, today)}`;
+  $app.innerHTML = `<div class="course"><strong>빅데이터를 활용한 디지털금융 전문가 과정</strong><span>K-Digital Training · 2026.10.30 – 2027.04.16 · 수업 전 7분 데일리 리딩</span></div><div class="today">${lead}${weekHtml}</div>${progressHtml(holidays, list, read, today)}`;
 }
 
 /* 과정 진도 + 달력 */
-function progressHtml(weeks, holidays, list, read, today){
+function progressHtml(holidays, list, read, today){
   const days = courseDays(holidays);
   const total = days.length;
   const idx = new Map(days.map((d,i) => [d, i+1]));
   const passed = days.filter(d => d <= today).length;
   const hol = new Map(holidays.map(h => [h.holiday_date, h]));
   const byDate = new Map(); list.forEach(a => { if(!byDate.has(a.publish_date)) byDate.set(a.publish_date, a); });
-  const curWeek = weekOf(weeks, today);
 
   // 큰 숫자
   let big, meta;
@@ -470,19 +505,15 @@ function progressHtml(weeks, holidays, list, read, today){
     const isClass = idx.has(today);
     big = isClass ? `${idx.get(today)}일차<small>/ ${total}일</small>` : `${passed}일 지남<small>/ ${total}일</small>`;
     const h = hol.get(today);
-    meta = `${h ? `오늘은 ${esc(h.kind)}(${esc(h.name)}) · ` : (!isClass ? "오늘은 수업이 없는 날 · " : "")}남은 수업일 <strong>${total - passed}일</strong>${curWeek ? `<br>${curWeek.week_no}주차 · ${esc(curWeek.phase)}` : ""}`;
+    meta = `${h ? `오늘은 ${esc(h.kind)}(${esc(h.name)}) · ` : (!isClass ? "오늘은 수업이 없는 날 · " : "")}남은 수업일 <strong>${total - passed}일</strong><br>진행률 ${Math.round(passed/total*100)}%`;
   }
 
-  // 단계별 진행 막대
-  const phases = [];
-  weeks.forEach(w => {
-    const wd = days.filter(d => d >= w.start_date && d <= w.end_date);
-    const last = phases[phases.length-1];
-    if(last && last.p === w.phase){ last.n += wd.length; last.done += wd.filter(d => d <= today).length; }
-    else phases.push({p:w.phase, n:wd.length, done:wd.filter(d => d <= today).length});
-  });
-  const track = phases.map(p => `<div class="seg" style="--n:${p.n}"><i style="--f:${p.n ? (p.done/p.n*100).toFixed(1) : 0}%"></i></div>`).join("");
-  const labels = phases.map(p => `<span style="--n:${p.n}" class="${curWeek && curWeek.phase === p.p ? "cur" : ""}">${esc(p.p)}</span>`).join("");
+  // 진행 막대 (월별 눈금)
+  const pct = total ? passed/total*100 : 0;
+  const track = `<div class="seg" style="--n:1"><i style="--f:${pct.toFixed(1)}%"></i></div>`;
+  const monthsCount = [];
+  days.forEach(d => { const m = d.slice(0,7); const last = monthsCount[monthsCount.length-1]; if(last && last.m === m) last.n++; else monthsCount.push({m, n:1}); });
+  const labels = monthsCount.map(x => `<span style="--n:${x.n}" class="${today.slice(0,7) === x.m ? "cur" : ""}">${+x.m.slice(5)}월</span>`).join("");
 
   // 달력 (월~금)
   const months = [];
@@ -545,40 +576,42 @@ function progressHtml(weeks, holidays, list, read, today){
 }
 
 /* ================= 페이지: 지난 글 ================= */
-const archiveState = { corner:"", week:"", q:"" };
+const archiveState = { corner:"", month:"", q:"" };
 async function pageArchive(params){
-  const [weeks, list] = await Promise.all([getWeeks(), getList()]);
+  const list = await getList();
   if(params.tag) archiveState.q = params.tag;
   const read = readSet();
-  const weekOpts = weeks.map(w => `<option value="${w.week_no}">${w.week_no}주차 · ${esc(w.theme)}</option>`).join("");
-  $app.innerHTML = `<div class="pagehead"><h1>지난 글</h1><p>코너, 주차, 키워드로 지금까지 올라온 글을 찾아보세요.</p></div>
+  const months = [...new Set(list.map(a => a.publish_date.slice(0,7)))];
+  const monthOpts = months.map(m => `<option value="${m}">${m.slice(0,4)}년 ${+m.slice(5)}월</option>`).join("");
+  $app.innerHTML = `<div class="pagehead"><h1>지난 글</h1><p>코너, 월, 키워드로 지금까지 올라온 글을 찾아보세요.</p></div>
     <div class="filters">
       <div class="chips" role="group" aria-label="코너">
         <button class="chip" data-c="" aria-pressed="false">전체</button>
         ${Object.entries(CORNERS).map(([k,v]) => `<button class="chip" data-c="${k}" aria-pressed="false">${v.name}</button>`).join("")}
       </div>
-      <select class="search" id="wsel" aria-label="주차"><option value="">모든 주차</option>${weekOpts}</select>
+      <select class="search" id="wsel" aria-label="월"><option value="">전체 기간</option>${monthOpts}</select>
       <input class="search" id="q" type="search" placeholder="제목, 태그, 요약에서 찾기" aria-label="검색">
     </div>
     <div id="res"></div>`;
   const res = document.getElementById("res");
   const q = document.getElementById("q"), wsel = document.getElementById("wsel");
-  q.value = archiveState.q; wsel.value = archiveState.week;
+  q.value = archiveState.q; wsel.value = archiveState.month;
   const draw = () => {
     $app.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", String(c.dataset.c === archiveState.corner)));
     const term = archiveState.q.trim().toLowerCase();
     const rows = list.filter(a =>
       (!archiveState.corner || a.corner === archiveState.corner) &&
-      (!archiveState.week || String(a.week_no) === archiveState.week) &&
+      (!archiveState.month || a.publish_date.startsWith(archiveState.month)) &&
       (!term || [a.title, a.subtitle, ...(a.tags||[]), ...(a.summary||[])].join(" ").toLowerCase().includes(term)));
     if(!list.length){ res.innerHTML = `<div class="empty"><strong>아직 올라온 글이 없어요</strong>첫 글은 ${esc(fmtD(CONFIG.COURSE_START))} 아침에 올라옵니다.</div>`; return; }
     if(!rows.length){ res.innerHTML = `<div class="empty"><strong>조건에 맞는 글이 없어요</strong>필터를 줄이거나 다른 키워드로 찾아보세요.</div>`; return; }
     let html = "", cur = null;
     rows.forEach(a => {
-      if(a.week_no !== cur){
+      const wk = mondayOf(a.publish_date);
+      if(wk !== cur){
         if(cur !== null) html += `</ul>`;
-        cur = a.week_no; const w = weeks.find(x => x.week_no === a.week_no);
-        html += `<div class="weekhead"><strong>${a.week_no ?? "-"}주차</strong>${w ? esc(w.theme) : ""}</div><ul class="list">`;
+        cur = wk;
+        html += `<div class="weekhead"><strong>${esc(weekRange(a.publish_date))}</strong></div><ul class="list">`;
       }
       html += `<li><a class="item" href="#/a/${esc(a.slug)}"><div class="when">${esc(fmtShort(a.publish_date))} ${dowOf(a.publish_date)}${read.has(a.slug) ? `<br><span class="readmark">읽음</span>` : ""}</div>
         <div>${cornerTag(a.corner)}<h3>${esc(a.title)}</h3><p>${esc(a.subtitle || (a.summary||[])[0] || "")}</p></div></a></li>`;
@@ -586,17 +619,16 @@ async function pageArchive(params){
     res.innerHTML = html + `</ul>`;
   };
   $app.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => { archiveState.corner = c.dataset.c; draw(); }));
-  wsel.addEventListener("change", () => { archiveState.week = wsel.value; draw(); });
+  wsel.addEventListener("change", () => { archiveState.month = wsel.value; draw(); });
   q.addEventListener("input", () => { archiveState.q = q.value; draw(); });
   draw();
 }
 
 /* ================= 페이지: 글 상세 ================= */
 async function pageArticle(slug){
-  const [a, list, weeks, jobs] = await Promise.all([getArticle(slug), getList(), getWeeks(), getJobs()]);
+  const [a, list, jobs] = await Promise.all([getArticle(slug), getList(), getJobs()]);
   if(!a){ $app.innerHTML = `<div class="empty"><strong>아직 공개되지 않았거나 없는 글이에요</strong><a href="#/archive">지난 글 목록으로 가기</a></div>`; return; }
   const terms = (await getTerms()).filter(t => t.article_id === a.id);
-  const week = weeks.find(w => w.week_no === a.week_no);
   const job = jobs.find(j => j.slug === a.related_job);
   const idx = list.findIndex(x => x.slug === slug);
   const newer = idx > 0 ? list[idx-1] : null, older = idx >= 0 ? list[idx+1] : null;
@@ -612,7 +644,7 @@ async function pageArticle(slug){
         ${cornerTag(a.corner)}
         <h1>${esc(a.title)}</h1>
         ${a.subtitle ? `<p class="sub">${esc(a.subtitle)}</p>` : ""}
-        <div class="meta"><span>${esc(fmtD(a.publish_date))}</span>${week ? `<span>${week.week_no}주차 · ${esc(week.theme)}</span>` : ""}<span>${a.reading_min}분 읽기</span></div>
+        <div class="meta"><span>${esc(fmtD(a.publish_date))}</span><span>${a.reading_min}분 읽기</span></div>
       </header>
       ${a.summary?.length ? `<section class="sumbox"><h2>3줄 요약</h2><ol class="summary">${a.summary.map(s => `<li>${esc(s)}</li>`).join("")}</ol></section>` : ""}
       <div class="prose" id="body">${renderMd(a.body_md)}</div>
@@ -636,7 +668,6 @@ async function pageArticle(slug){
       </nav>
     </div>
     <aside class="side">
-      ${week ? `<div><h3>이번 주 수업</h3><a href="#/weeks">${week.week_no}주차 · ${esc(week.theme)}</a></div>` : ""}
       ${job ? `<div><h3>관련 직무</h3><a href="#/jobs/${esc(job.slug)}">${esc(job.name)}</a></div>` : ""}
       ${a.tags?.length ? `<div><h3>태그</h3><div class="tags">${a.tags.map(t => `<a href="#/archive?tag=${encodeURIComponent(t)}">${esc(t)}</a>`).join("")}</div></div>` : ""}
     </aside>
@@ -694,45 +725,77 @@ async function pageTerms(){
 }
 
 /* ================= 페이지: 직무 지도 ================= */
+const SKILLS = ["SQL","Python","통계·수학","머신러닝","금융 지식","커뮤니케이션"];
+const LEVEL = ["", "기본 이해", "자주 씀", "핵심 역량"];
+const dots = n => `<span class="dots" role="img" aria-label="${LEVEL[n]||"-"}">${[1,2,3].map(i => `<i class="${i <= n ? "on" : ""}"></i>`).join("")}</span>`;
+const jobState = { type:"" };
 async function pageJobs(){
   const jobs = await getJobs();
-  $app.innerHTML = `<div class="pagehead"><h1>직무 지도</h1><p>이 과정을 마치고 도전할 수 있는 금융권 데이터 직무예요. 화요일 ‘직무 돋보기’ 글이 쌓이면 직무별로 모여요.</p></div>
-    <div class="jobs">${jobs.map(j => `<a class="job" href="#/jobs/${esc(j.slug)}"><h3>${esc(j.name)}</h3><p>${esc(j.one_liner)}</p><div class="where">${esc((j.workplaces||[]).join(", "))}</div></a>`).join("")}</div>`;
+  $app.innerHTML = `<div class="pagehead"><h1>직무 지도</h1><p>이 과정을 마치고 도전할 수 있는 금융권 데이터 직무 8가지예요. 무엇을 들여다보는지, 무엇을 만들어 내는지로 나눠 보면 정리가 쉬워요. 직무를 누르면 하루 일과, 준비할 것, 면접 질문까지 볼 수 있어요.</p></div>
+    <div class="filters"><div class="chips" role="group" aria-label="일의 종류">
+      <button class="chip" data-t="">전체</button>
+      <button class="chip" data-t="분석·판단">분석해서 판단을 돕는 일</button>
+      <button class="chip" data-t="모델·시스템">모델·시스템을 만드는 일</button>
+    </div></div>
+    <div class="jobs" id="jobgrid"></div>
+    <section class="block" style="max-width:none">
+      <h2>역량 한눈에 비교</h2>
+      <p class="muted small" style="margin:0 0 12px">점 3개는 핵심 역량, 2개는 자주 쓰는 역량, 1개는 기본만 알면 되는 역량이에요.</p>
+      <div class="cmpwrap"><table class="cmp">
+        <thead><tr><th scope="col">직무</th>${SKILLS.map(k => `<th scope="col">${esc(k)}</th>`).join("")}</tr></thead>
+        <tbody>${jobs.map(j => `<tr><th scope="row"><a href="#/jobs/${esc(j.slug)}">${esc(j.name)}</a></th>${SKILLS.map(k => `<td>${dots((j.skill_levels||{})[k]||0)}</td>`).join("")}</tr>`).join("")}</tbody>
+      </table></div>
+    </section>`;
+  const grid = document.getElementById("jobgrid");
+  const draw = () => {
+    $app.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", String(c.dataset.t === jobState.type)));
+    grid.innerHTML = jobs.filter(j => !jobState.type || j.output_type === jobState.type).map(j => `
+      <a class="job" href="#/jobs/${esc(j.slug)}">
+        <div class="jtags">${j.focus ? `<span>${esc(j.focus)}</span>` : ""}${j.output_type ? `<span>${esc(j.output_type)}</span>` : ""}</div>
+        <h3>${esc(j.name)}</h3>
+        <p>${esc(j.one_liner)}</p>
+        <div class="where">${esc((j.workplaces||[]).join(", "))}</div>
+      </a>`).join("");
+  };
+  $app.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => { jobState.type = c.dataset.t; draw(); }));
+  draw();
 }
 async function pageJob(slug){
-  const [jobs, list, weeks] = await Promise.all([getJobs(), getList(), getWeeks()]);
+  const [jobs, list] = await Promise.all([getJobs(), getList()]);
   const j = jobs.find(x => x.slug === slug);
   if(!j){ $app.innerHTML = `<div class="empty"><strong>없는 직무예요</strong><a href="#/jobs">직무 지도로 가기</a></div>`; return; }
   document.title = `${j.name} | 하루 7분 금융×데이터 – 유비온 디지털교육센터`;
   const arts = list.filter(a => a.related_job === slug);
-  const ul = xs => xs?.length ? `<ul>${xs.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : `<p class="muted small">준비 중</p>`;
-  $app.innerHTML = `<div class="pagehead"><a href="#/jobs" class="small muted">직무 지도</a><h1>${esc(j.name)}</h1><p>${esc(j.one_liner)}</p></div>
-    <div class="jobdetail">
-      <div><h2>어디서 일하나요</h2>${ul(j.workplaces)}</div>
-      <div><h2>무슨 일을 하나요</h2>${ul(j.tasks)}</div>
-      <div><h2>어떤 데이터를 다루나요</h2>${ul(j.data_used)}</div>
-      <div><h2>필요한 역량</h2>${ul(j.skills)}</div>
-      <div><h2>도움이 되는 자격증</h2>${ul(j.certs)}</div>
-      <div><h2>이 과정에서 연결되는 주차</h2><div class="weeklinks">${(j.related_weeks||[]).map(n => { const w = weeks.find(x => x.week_no === n); return `<a href="#/weeks" title="${esc(w?.theme||"")}">${n}주차</a>`; }).join("")}</div></div>
+  const ul = (xs, cls="") => xs?.length ? `<ul class="${cls}">${xs.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : `<p class="muted small">준비 중</p>`;
+  const day = Array.isArray(j.day_in_life) ? j.day_in_life : [];
+  const sk = j.skill_levels || {};
+  const sims = (j.similar_jobs||[]).map(s => jobs.find(x => x.slug === s)).filter(Boolean);
+  $app.innerHTML = `<div class="pagehead"><a href="#/jobs" class="small muted">직무 지도</a><h1>${esc(j.name)}</h1><p>${esc(j.one_liner)}</p>
+      <div class="jtags" style="margin-top:12px">${j.focus ? `<span>${esc(j.focus)}</span>` : ""}${j.output_type ? `<span>${esc(j.output_type)}</span>` : ""}</div></div>
+    <div class="jobpage">
+      <div class="jmain">
+        ${j.intro ? `<p class="jintro">${esc(j.intro)}</p>` : ""}
+        ${day.length ? `<section><h2>하루는 이렇게 흘러가요</h2><ol class="timeline">${day.map(x => `<li><time>${esc(x.t)}</time><span>${esc(x.d)}</span></li>`).join("")}</ol><p class="muted small">회사와 팀마다 다른 예시 일과예요.</p></section>` : ""}
+        <section><h2>주요 업무</h2>${ul(j.tasks)}</section>
+        <section><h2>다루는 데이터</h2>${ul(j.data_used)}</section>
+        <section><h2>만들어 내는 결과물</h2>${ul(j.deliverables)}</section>
+        ${j.project_links?.length ? `<section><h2>이 과정의 프로젝트와 이어지는 주제</h2>${ul(j.project_links, "proj")}</section>` : ""}
+        ${j.entry_tips?.length ? `<section><h2>신입으로 준비하면 좋은 것</h2>${ul(j.entry_tips, "checks")}</section>` : ""}
+        ${j.interview_qs?.length ? `<section><h2>면접에서 나올 수 있는 질문</h2><ol class="qs">${j.interview_qs.map(q => `<li>${esc(q)}</li>`).join("")}</ol></section>` : ""}
+      </div>
+      <aside class="jside">
+        <section><h3>필요한 역량</h3><dl class="skills">${SKILLS.map(k => `<div><dt>${esc(k)}</dt><dd>${dots(sk[k]||0)}<span>${LEVEL[sk[k]||0] || ""}</span></dd></div>`).join("")}</dl>
+          ${j.skills?.length ? `<p class="muted small" style="margin:10px 0 0">${esc(j.skills.join(", "))}</p>` : ""}</section>
+        <section><h3>자주 쓰는 도구</h3>${ul(j.tools)}</section>
+        <section><h3>도움이 되는 자격증</h3>${ul(j.certs)}</section>
+        <section><h3>일하는 곳</h3>${ul(j.workplaces)}</section>
+        ${j.career_path?.length ? `<section><h3>성장 경로</h3><ol class="path">${j.career_path.map(c => `<li>${esc(c)}</li>`).join("")}</ol></section>` : ""}
+        ${sims.length ? `<section><h3>함께 보면 좋은 직무</h3><div class="sims">${sims.map(x => `<a href="#/jobs/${esc(x.slug)}">${esc(x.name)}</a>`).join("")}</div></section>` : ""}
+      </aside>
     </div>
-    <section class="block" style="max-width:none"><h2>관련 글</h2>${arts.length
+    <section class="block" style="max-width:none"><h2>이 직무를 다룬 글</h2>${arts.length
       ? `<ul class="list">${arts.map(a => `<li><a class="item" href="#/a/${esc(a.slug)}"><div class="when">${esc(fmtShort(a.publish_date))}</div><div>${cornerTag(a.corner)}<h3>${esc(a.title)}</h3></div></a></li>`).join("")}</ul>`
-      : `<p class="muted">아직 이 직무를 다룬 글이 없어요. 화요일마다 직무 이야기가 올라옵니다.</p>`}</section>`;
-}
-
-/* ================= 페이지: 커리큘럼 ================= */
-async function pageWeeks(){
-  const [weeks, list] = await Promise.all([getWeeks(), getList()]);
-  const today = todayKST();
-  const cnt = new Map(); list.forEach(a => cnt.set(a.week_no, (cnt.get(a.week_no)||0)+1));
-  $app.innerHTML = `<div class="pagehead"><h1>커리큘럼</h1><p>데일리 리딩은 그 주 수업 주제에 맞춰 올라와요. 5.5개월 동안의 흐름이에요.</p></div>
-    <ol class="curri">${weeks.map(w => {
-      const now = today >= w.start_date && today <= w.end_date;
-      return `<li class="${now ? "now" : ""}"${now ? ' aria-current="true"' : ""}>
-        <div class="no">${w.week_no}주차</div>
-        <div class="dates">${esc(fmtShort(w.start_date))} – ${esc(fmtShort(w.end_date))}${cnt.get(w.week_no) ? `<br>글 ${cnt.get(w.week_no)}편` : ""}</div>
-        <div><div class="ph">${esc(w.phase)}</div><h3>${esc(w.theme)}</h3><p>${esc((w.topics||[]).join(" / "))}</p></div>
-      </li>`; }).join("")}</ol>`;
+      : `<p class="muted">아직 이 직무를 깊게 다룬 글이 없어요. 화요일 ‘직무 돋보기’에서 차례로 다룹니다.</p>`}</section>`;
 }
 
 /* ================= 라우터 ================= */
@@ -755,7 +818,6 @@ async function route(){
     else if(parts[0] === "terms") await pageTerms();
     else if(parts[0] === "jobs" && parts[1]) await pageJob(decodeURIComponent(parts[1]));
     else if(parts[0] === "jobs") await pageJobs();
-    else if(parts[0] === "weeks") await pageWeeks();
     else $app.innerHTML = `<div class="empty"><strong>없는 페이지예요</strong><a href="#/">오늘의 글로 가기</a></div>`;
   }catch(e){ console.error(e); $app.innerHTML = errorBox(e); }
 }
