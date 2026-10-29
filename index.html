@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>하루 7분 금융×데이터 | 빅데이터를 활용한 디지털금융 전문가 과정 – 유비온 디지털교육센터</title>
+<meta name="description" content="유비온 디지털교육센터 K-Digital Training 「빅데이터를 활용한 디지털금융 전문가 과정」 수강생을 위한 데일리 학습자료">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" id="hl-light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/r.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+:root{
+  --paper:#EEF2EC;      /* 통장 속지 같은 옅은 회녹색 */
+  --sheet:#FBFCFA;
+  --ink:#1B2A27;
+  --ink-2:#4C5D58;
+  --ink-3:#83918C;
+  --rule:#D3DBD5;
+  --rise:#C8323C;       /* 한국 시장의 상승 빨강 = 읽은 날 */
+  --fall:#2F5BD3;
+  --c-concept:#C8323C;
+  --c-job:#2F5BD3;
+  --c-code:#0E7C66;
+  --c-issue:#B4730B;
+  --c-paper:#6B4FA8;
+  --focus:#2F5BD3;
+  --serif:"Gowun Batang",serif;
+  --sans:"IBM Plex Sans KR",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#121A18;--sheet:#18221F;--ink:#E4ECE8;--ink-2:#AAB8B3;--ink-3:#71807B;--rule:#2C3934;
+    --rise:#F0626B;--fall:#7C9BF0;--c-concept:#F0626B;--c-job:#7C9BF0;--c-code:#3FBF9D;--c-issue:#E3A63B;--c-paper:#A98AE6;--focus:#7C9BF0;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121A18;--sheet:#18221F;--ink:#E4ECE8;--ink-2:#AAB8B3;--ink-3:#71807B;--rule:#2C3934;
+  --rise:#F0626B;--fall:#7C9BF0;--c-concept:#F0626B;--c-job:#7C9BF0;--c-code:#3FBF9D;--c-issue:#E3A63B;--c-paper:#A98AE6;--focus:#7C9BF0;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.7 var(--sans);word-break:keep-all;overflow-wrap:anywhere}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:2px}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+
+/* 상단 */
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:center;gap:20px;height:66px}
+.brand{display:flex;flex-direction:column;text-decoration:none;white-space:nowrap;line-height:1.25}
+.brand .org{font-size:12px;color:var(--ink-2);font-weight:500}
+.brand .org em{font-style:normal;color:var(--fall);font-weight:600}
+.brand .name{font-family:var(--serif);font-weight:700;font-size:19px;letter-spacing:-.01em}
+.brand b{color:var(--rise);font-weight:700}
+.course{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:0 0 22px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.course strong{font-family:var(--serif);font-size:18px;font-weight:700}
+.course span{font-size:14px;color:var(--ink-2)}
+footer .org{display:flex;flex-direction:column;gap:2px}
+footer .org strong{color:var(--ink-2);font-weight:600;font-size:14px}
+footer a{color:var(--ink-2)}
+.nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{text-decoration:none;font-size:14.5px;color:var(--ink-2);padding:6px 10px;border-radius:6px;white-space:nowrap}
+.nav a[aria-current="page"]{color:var(--ink);background:var(--sheet);box-shadow:inset 0 0 0 1px var(--rule)}
+.nav a:hover{color:var(--ink)}
+@media (max-width:640px){
+  .top .wrap{flex-wrap:wrap;height:auto;padding-top:10px;gap:4px}
+  .nav{margin-left:-10px;width:calc(100% + 10px);padding-bottom:6px}
+}
+
+main.wrap{padding-top:32px;padding-bottom:80px;min-height:70vh}
+.muted{color:var(--ink-2)}
+.small{font-size:14px}
+h1,h2,h3{line-height:1.3;letter-spacing:-.015em}
+h1{font-family:var(--serif);font-size:clamp(28px,4.4vw,40px);margin:0 0 10px;font-weight:700}
+h2{font-size:21px;margin:0 0 14px;font-weight:700}
+.pagehead{margin-bottom:26px}
+.pagehead p{margin:0;color:var(--ink-2);max-width:60ch}
+
+/* 코너 표시 */
+.corner{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--cc)}
+.corner::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--cc)}
+[data-corner="concept"]{--cc:var(--c-concept)}
+[data-corner="job"]{--cc:var(--c-job)}
+[data-corner="code"]{--cc:var(--c-code)}
+[data-corner="issue"]{--cc:var(--c-issue)}
+[data-corner="paper"]{--cc:var(--c-paper)}
+
+/* 홈: 오늘 */
+.today{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:820px){.today{grid-template-columns:1fr}}
+.lead{background:var(--sheet);border:1px solid var(--rule);border-radius:14px;padding:28px 30px;border-top:4px solid var(--cc,var(--ink))}
+.lead .date{font-size:14px;color:var(--ink-2);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.lead h1 a{text-decoration:none}
+.lead h1 a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}
+.lead .sub{font-size:17px;color:var(--ink-2);margin:0 0 18px}
+.summary{list-style:none;padding:0;margin:0 0 22px;counter-reset:s}
+.summary li{position:relative;padding-left:30px;margin:6px 0}
+.summary li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:3px;width:20px;height:20px;border-radius:50%;border:1px solid var(--rule);font:500 12px/18px var(--mono);text-align:center;color:var(--ink-2)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);border:0;border-radius:8px;padding:10px 18px;font-weight:600;text-decoration:none;font-size:15px}
+.btn:hover{opacity:.9}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--rule)}
+.btn[aria-pressed="true"]{background:var(--rise);color:#fff}
+
+.weekbox{padding:4px 0}
+.weekbox .phase{font-size:13px;color:var(--ink-3);margin-bottom:2px}
+.weekbox h2{font-family:var(--serif);font-size:23px;margin-bottom:12px}
+.topics{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px;padding:0;list-style:none}
+.topics li{font-size:13.5px;padding:3px 10px;border-radius:999px;background:var(--sheet);border:1px solid var(--rule)}
+.weeklist{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.weeklist li{border-bottom:1px solid var(--rule)}
+.weeklist a,.weeklist .slot{display:grid;grid-template-columns:66px 1fr auto;gap:10px;align-items:baseline;padding:10px 2px;text-decoration:none}
+.weeklist .dow{font:500 13px var(--mono);color:var(--ink-3);white-space:nowrap}
+.weeklist .t{font-size:15px}
+.weeklist .slot .t{color:var(--ink-3)}
+.weeklist a:hover .t{text-decoration:underline}
+.readmark{font-size:12px;color:var(--rise);font-weight:600}
+
+/* 학습 차트 */
+.chart{margin-top:44px;background:var(--sheet);border:1px solid var(--rule);border-radius:14px;padding:22px 24px 18px}
+.chart-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 20px;margin-bottom:16px}
+.chart-head h2{margin:0}
+.stat{display:flex;gap:22px;font-size:14px;color:var(--ink-2)}
+.stat strong{font:600 22px/1 var(--mono);color:var(--ink);display:block;margin-bottom:4px}
+.stat .up strong{color:var(--rise)}
+.bars{display:flex;align-items:flex-end;height:120px;gap:2px;position:relative}
+.wk{display:flex;align-items:flex-end;gap:2px;flex:var(--n) 1 0;min-width:0;height:100%;padding-right:3px;position:relative}
+.wk + .wk{border-left:1px dashed transparent}
+.wk.phase-start{border-left:1px solid var(--rule);padding-left:3px}
+.bar{flex:1 1 0;min-width:1px;border-radius:2px 2px 0 0;background:transparent;box-shadow:inset 0 0 0 1px var(--rule);height:30%;padding:0;border:0;position:relative}
+.bar.pub{background:var(--ink-3);box-shadow:none;height:var(--h)}
+.bar.read{background:var(--rise)}
+.bar.today{outline:2px solid var(--ink);outline-offset:1px}
+@media (max-width:640px){.bar.today{outline-width:1px}.lead{padding:22px 20px}.chart{padding:18px 16px 14px}}
+.bar.pub:hover,.bar.pub:focus-visible{background:var(--ink)}
+.bar.read:hover{background:color-mix(in srgb,var(--rise) 75%,var(--ink))}
+.bar:not(.pub){cursor:default}
+.phases{display:flex;gap:2px;margin-top:8px;font-size:12px;color:var(--ink-3)}
+.phases span{flex:var(--n) 1 0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-left:3px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:13px;color:var(--ink-2)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.tip{position:fixed;z-index:20;pointer-events:none;background:var(--ink);color:var(--paper);font-size:13px;line-height:1.45;padding:7px 10px;border-radius:6px;max-width:260px;opacity:0;transition:opacity .12s}
+.tip.on{opacity:1}
+
+/* 글 목록 */
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:22px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:5px 12px;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.search{flex:1 1 220px;min-width:0;border:1px solid var(--rule);background:var(--sheet);border-radius:8px;padding:9px 12px;font:inherit;font-size:15px;color:var(--ink)}
+select.search{flex:0 1 200px}
+.list{list-style:none;margin:0;padding:0}
+.list > li{border-top:1px solid var(--rule)}
+.item{display:grid;grid-template-columns:110px minmax(0,1fr);gap:18px;padding:18px 2px;text-decoration:none}
+.item .when{font:500 13px/1.6 var(--mono);color:var(--ink-3)}
+.item h3{margin:2px 0 4px;font-size:18px;font-family:var(--serif)}
+.item p{margin:0;color:var(--ink-2);font-size:15px}
+.item:hover h3{text-decoration:underline}
+@media (max-width:560px){.item{grid-template-columns:1fr;gap:4px}}
+.weekhead{margin:30px 0 4px;font-size:14px;color:var(--ink-2);display:flex;gap:10px;align-items:baseline}
+.weekhead strong{color:var(--ink);font-size:16px}
+
+/* 글 상세 */
+.article{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:48px}
+@media (max-width:900px){.article{grid-template-columns:1fr;gap:28px}}
+.article header{margin-bottom:24px}
+.article .meta{font-size:14px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:4px 14px;margin:12px 0 0}
+.article .sub{font-size:18px;color:var(--ink-2);margin:4px 0 0}
+.sumbox{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:18px 22px 10px;margin:0 0 30px}
+.sumbox h2{font-size:15px;margin:0 0 6px;color:var(--ink-2)}
+.prose{max-width:68ch;font-size:17px;line-height:1.85}
+.prose h2{font-size:23px;margin:42px 0 12px;font-family:var(--serif)}
+.prose h3{font-size:19px;margin:30px 0 8px}
+.prose p{margin:0 0 18px}
+.prose ul,.prose ol{padding-left:24px;margin:0 0 18px}
+.prose li{margin:4px 0}
+.prose blockquote{margin:24px 0;padding:4px 0 4px 18px;border-left:3px solid var(--cc,var(--ink));color:var(--ink-2)}
+.prose code{font-family:var(--mono);font-size:.88em;background:var(--sheet);border:1px solid var(--rule);padding:1px 5px;border-radius:4px}
+.prose pre{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:16px 18px;overflow-x:auto;font-size:14px;line-height:1.6;margin:0 0 22px}
+.prose pre code{border:0;padding:0;background:none;font-size:inherit}
+.prose table{border-collapse:collapse;width:100%;font-size:15px;margin:0 0 22px;display:block;overflow-x:auto}
+.prose th,.prose td{border-bottom:1px solid var(--rule);padding:8px 10px;text-align:left;vertical-align:top}
+.prose th{font-weight:600;border-bottom-color:var(--ink-3)}
+.prose img{max-width:100%;height:auto;border-radius:8px}
+.prose hr{border:0;border-top:1px solid var(--rule);margin:32px 0}
+.prose a{color:var(--fall)}
+.katex-display{overflow-x:auto;overflow-y:hidden;padding:4px 0}
+.hljs{background:transparent!important;color:var(--ink)}
+
+.block{margin-top:44px;max-width:68ch}
+.block > h2{font-size:19px;display:flex;align-items:center;gap:8px}
+.quiz{border:1px solid var(--rule);border-radius:12px;background:var(--sheet);padding:18px 20px;margin-bottom:12px}
+.quiz .q{font-weight:600;margin:0 0 12px}
+.quiz .opts{display:grid;gap:8px}
+.opt{text-align:left;border:1px solid var(--rule);background:var(--paper);border-radius:8px;padding:9px 12px;font-size:15px}
+.opt:hover:not(:disabled){border-color:var(--ink-3)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--c-code);box-shadow:inset 0 0 0 1px var(--c-code)}
+.opt.wrong{border-color:var(--rise);box-shadow:inset 0 0 0 1px var(--rise);opacity:.8}
+.explain{margin:12px 0 0;font-size:15px;color:var(--ink-2)}
+.explain strong{color:var(--ink)}
+.terms{display:grid;gap:10px;margin:0}
+.terms div{border-left:3px solid var(--rule);padding:2px 0 2px 14px}
+.terms dt{font-weight:600}
+.terms dt span{font-weight:400;color:var(--ink-3);font-size:14px;margin-left:6px}
+.terms dd{margin:2px 0 0;color:var(--ink-2);font-size:15px}
+.sources{padding-left:20px;margin:0}
+.sources li{margin:4px 0;font-size:15px}
+.sources a{color:var(--fall)}
+.side{position:sticky;top:84px;align-self:start;display:grid;gap:22px;font-size:14px}
+@media (max-width:900px){.side{position:static}}
+.side h3{font-size:13px;color:var(--ink-3);font-weight:500;margin:0 0 6px}
+.side .tags{display:flex;flex-wrap:wrap;gap:6px}
+.side .tags a{text-decoration:none;font-size:13px;padding:2px 9px;border-radius:999px;border:1px solid var(--rule)}
+.side .tags a:hover{border-color:var(--ink-3)}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:54px;max-width:68ch}
+.pager a{display:block;border:1px solid var(--rule);border-radius:10px;padding:12px 16px;text-decoration:none;background:var(--sheet)}
+.pager a:hover{border-color:var(--ink-3)}
+.pager small{display:block;color:var(--ink-3);font-size:13px}
+.pager .next{text-align:right;grid-column:2}
+
+/* 용어사전 */
+.glossary{columns:2 320px;column-gap:40px}
+.glossary section{break-inside:avoid;margin-bottom:22px}
+.glossary h2{font:600 15px var(--mono);color:var(--ink-3);border-bottom:1px solid var(--rule);padding-bottom:4px;margin:0 0 8px}
+.glossary dl{margin:0}
+.glossary dt{font-weight:600;margin-top:10px}
+.glossary dt small{font-weight:400;color:var(--ink-3);margin-left:6px}
+.glossary dd{margin:2px 0 0;color:var(--ink-2);font-size:15px}
+.glossary dd a{font-size:13px;color:var(--fall)}
+
+/* 직무 */
+.jobs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden}
+.job{background:var(--sheet);padding:20px 20px 22px;text-decoration:none;display:block}
+.job:hover{background:var(--paper)}
+.job h3{font-family:var(--serif);font-size:19px;margin:0 0 6px}
+.job p{margin:0 0 12px;color:var(--ink-2);font-size:15px}
+.job .where{font-size:13px;color:var(--ink-3)}
+.jobdetail{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px 40px;margin-top:26px}
+.jobdetail h2{font-size:15px;color:var(--ink-2);margin:0 0 8px;font-weight:600}
+.jobdetail ul{margin:0;padding-left:20px}
+.jobdetail li{margin:3px 0}
+.weeklinks{display:flex;flex-wrap:wrap;gap:6px}
+.weeklinks a{font:500 13px var(--mono);text-decoration:none;border:1px solid var(--rule);border-radius:6px;padding:2px 8px}
+
+/* 커리큘럼 */
+.curri{list-style:none;margin:0;padding:0}
+.curri li{display:grid;grid-template-columns:76px 150px minmax(0,1fr);gap:16px;padding:14px 2px;border-top:1px solid var(--rule)}
+.curri li.now{background:var(--sheet);box-shadow:inset 3px 0 0 var(--rise)}
+.curri .no{font:600 15px var(--mono)}
+.curri .dates{font:400 13px/1.7 var(--mono);color:var(--ink-3)}
+.curri h3{margin:0 0 4px;font-size:17px}
+.curri .ph{font-size:13px;color:var(--ink-3)}
+.curri p{margin:4px 0 0;font-size:14px;color:var(--ink-2)}
+@media (max-width:640px){.curri li{grid-template-columns:56px minmax(0,1fr)}.curri .dates{grid-column:2}}
+
+.empty{border:1px dashed var(--rule);border-radius:14px;padding:40px 28px;text-align:center;color:var(--ink-2)}
+.empty strong{display:block;color:var(--ink);font-family:var(--serif);font-size:22px;margin-bottom:6px}
+.err{border-color:var(--rise)}
+.skeleton{height:14px;border-radius:4px;background:var(--rule);opacity:.6;margin:10px 0}
+footer{border-top:1px solid var(--rule);padding:22px 0 40px;font-size:13px;color:var(--ink-3)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between;align-items:flex-end}
+footer button{background:none;border:0;padding:0;color:var(--ink-2);text-decoration:underline;font-size:13px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#/"><span class="org">유비온 디지털교육센터 · <em>K-Digital Training</em></span><span class="name">하루 7분 <b>금융×데이터</b></span></a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#/" data-nav="home">오늘</a>
+      <a href="#/archive" data-nav="archive">지난 글</a>
+      <a href="#/terms" data-nav="terms">용어사전</a>
+      <a href="#/jobs" data-nav="jobs">직무 지도</a>
+      <a href="#/weeks" data-nav="weeks">커리큘럼</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap" id="app" tabindex="-1"></main>
+<footer>
+  <div class="wrap">
+    <div class="org"><strong>유비온 디지털교육센터</strong><span>K-Digital Training 「빅데이터를 활용한 디지털금융 전문가 과정」 데일리 학습자료</span><span>평일 아침마다 새 글이 올라옵니다 · <a href="https://ai.ubion.co.kr/Home/BigdataCourse" target="_blank" rel="noopener">과정 안내 페이지</a></span></div>
+    <button type="button" id="themeBtn">화면 밝기 바꾸기</button>
+  </div>
+</footer>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script>
+/* ================= 설정 ================= */
+const CONFIG = {
+  SUPABASE_URL: "https://jcwyubqwbrprqumfikbo.supabase.co",
+  SUPABASE_KEY: "sb_publishable_OEHdr2ErKATvhgQ_O9XJPQ_220bLpBD", // 공개용(읽기 전용) 키
+  COURSE_START: "2026-10-30",
+  COURSE_END: "2027-04-16",
+};
+const CORNERS = {
+  concept:{name:"오늘의 개념", dow:"월"},
+  job:{name:"직무 돋보기", dow:"화"},
+  code:{name:"개념 + 코드 한 스푼", dow:"수"},
+  issue:{name:"이슈 브리핑", dow:"목"},
+  paper:{name:"논문 한 입", dow:"금"},
+};
+const DOW = ["일","월","화","수","목","금","토"];
+
+/* ================= 유틸 ================= */
+const $app = document.getElementById("app");
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const todayKST = () => new Date(Date.now() + 9*3600e3).toISOString().slice(0,10);
+const parseD = s => { const [y,m,d] = s.split("-").map(Number); return new Date(Date.UTC(y,m-1,d)); };
+const fmtD = s => { const d = parseD(s); return `${d.getUTCMonth()+1}월 ${d.getUTCDate()}일 (${DOW[d.getUTCDay()]})`; };
+const fmtShort = s => { const d = parseD(s); return `${d.getUTCMonth()+1}.${String(d.getUTCDate()).padStart(2,"0")}`; };
+const dowOf = s => DOW[parseD(s).getUTCDay()];
+const addDays = (s,n) => { const d = parseD(s); d.setUTCDate(d.getUTCDate()+n); return d.toISOString().slice(0,10); };
+
+const store = {
+  get(k, f){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : f; }catch(e){ return f; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
+};
+const readSet = () => new Set(store.get("dr.read", []));
+function toggleRead(slug){
+  const s = readSet(); s.has(slug) ? s.delete(slug) : s.add(slug);
+  store.set("dr.read", [...s]); return s.has(slug);
+}
+
+/* ================= 데이터 ================= */
+async function api(path){
+  const r = await fetch(`${CONFIG.SUPABASE_URL}/rest/v1/${path}`, {
+    headers:{ apikey:CONFIG.SUPABASE_KEY, Authorization:`Bearer ${CONFIG.SUPABASE_KEY}` }
+  });
+  if(!r.ok) throw new Error(`${r.status} ${await r.text()}`);
+  return r.json();
+}
+const LIST_COLS = "id,slug,publish_date,week_no,corner,title,subtitle,summary,tags,reading_min,related_job";
+const cache = {};
+const once = (k, f) => cache[k] ??= f().catch(e => { delete cache[k]; throw e; });
+const getWeeks    = () => once("weeks", () => api("daily_weeks?select=*&order=week_no"));
+const getHolidays = () => once("hol",   () => api("daily_holidays?select=*"));
+const getJobs     = () => once("jobs",  () => api("daily_jobs?select=*&order=sort_order"));
+const getList     = () => once("list",  () => api(`daily_articles?select=${LIST_COLS}&order=publish_date.desc,id.desc`));
+const getTerms    = () => once("terms", () => api("daily_terms?select=id,term,term_en,definition,article_id&order=term"));
+const getArticle  = slug => once("a:"+slug, () => api(`daily_articles?select=*&slug=eq.${encodeURIComponent(slug)}&limit=1`).then(r => r[0] || null));
+
+/* ================= 마크다운 + 수식 ================= */
+marked.setOptions({ gfm:true, breaks:false });
+function renderMd(md){
+  const math = [];
+  // $$...$$ 와 $...$ 를 먼저 빼 두었다가 렌더 후 되돌림 (마크다운이 수식을 망가뜨리지 않게)
+  let src = String(md || "")
+    .replace(/\$\$([\s\S]+?)\$\$/g, (_, m) => `%%KX${math.push({m, d:true})-1}%%`)
+    .replace(/(^|[^\\$])\$([^\n$]+?)\$/g, (_, p, m) => `${p}%%KX${math.push({m, d:false})-1}%%`);
+  let html = DOMPurify.sanitize(marked.parse(src));
+  html = html.replace(/%%KX(\d+)%%/g, (_, i) => {
+    const {m, d} = math[+i];
+    try { return katex.renderToString(m, {displayMode:d, throwOnError:false, output:"html"}); }
+    catch(e){ return esc(m); }
+  });
+  return html;
+}
+function highlight(root){
+  root.querySelectorAll("pre code").forEach(el => { try{ hljs.highlightElement(el); }catch(e){} });
+  root.querySelectorAll(".prose a[href^='http']").forEach(a => { a.target = "_blank"; a.rel = "noopener"; });
+}
+
+/* ================= 화면 조각 ================= */
+const cornerTag = c => `<span class="corner" data-corner="${esc(c)}">${esc(CORNERS[c]?.name || c)}</span>`;
+const loading = () => `<div aria-busy="true" aria-label="불러오는 중"><div class="skeleton" style="width:30%"></div><div class="skeleton" style="width:70%;height:30px"></div><div class="skeleton"></div><div class="skeleton" style="width:85%"></div></div>`;
+const errorBox = e => `<div class="empty err" role="alert"><strong>글을 불러오지 못했어요</strong>네트워크 연결을 확인한 뒤 새로고침해 주세요.<br><span class="small">(${esc(e.message).slice(0,140)})</span></div>`;
+const weekOf = (weeks, date) => weeks.find(w => date >= w.start_date && date <= w.end_date);
+
+function courseDays(holidays){
+  const hol = new Set(holidays.map(h => h.holiday_date));
+  const days = [];
+  for(let d = CONFIG.COURSE_START; d <= CONFIG.COURSE_END; d = addDays(d,1)){
+    const w = parseD(d).getUTCDay();
+    if(w > 0 && w < 6 && !hol.has(d)) days.push(d);
+  }
+  return days;
+}
+
+/* ================= 페이지: 오늘 ================= */
+async function pageHome(){
+  const [weeks, holidays, list] = await Promise.all([getWeeks(), getHolidays(), getList()]);
+  const today = todayKST();
+  const read = readSet();
+  const latest = list[0];
+  const week = weekOf(weeks, today) || (today < CONFIG.COURSE_START ? weeks[0] : weeks[weeks.length-1]);
+  const byDate = new Map(); list.forEach(a => { if(!byDate.has(a.publish_date)) byDate.set(a.publish_date, a); });
+
+  // 오늘의 글
+  let lead;
+  if(!latest){
+    lead = `<div class="empty"><strong>첫 글은 ${esc(fmtD(CONFIG.COURSE_START))} 아침에 올라와요</strong>매일 평일 아침, 수업 전에 7분이면 읽을 수 있는 글이 한 편씩 쌓입니다.</div>`;
+  } else {
+    const isToday = latest.publish_date === today;
+    const isRead = read.has(latest.slug);
+    lead = `<article class="lead" data-corner="${esc(latest.corner)}">
+      <div class="date">${cornerTag(latest.corner)}<span>${isToday ? "오늘" : "가장 최근 글"} · ${esc(fmtD(latest.publish_date))}</span><span>${latest.reading_min}분</span></div>
+      <h1><a href="#/a/${esc(latest.slug)}">${esc(latest.title)}</a></h1>
+      ${latest.subtitle ? `<p class="sub">${esc(latest.subtitle)}</p>` : ""}
+      ${latest.summary?.length ? `<ol class="summary">${latest.summary.map(s => `<li>${esc(s)}</li>`).join("")}</ol>` : ""}
+      <a class="btn" href="#/a/${esc(latest.slug)}">${isRead ? "다시 읽기" : "읽으러 가기"}</a>
+    </article>`;
+  }
+
+  // 이번 주
+  let weekHtml = "";
+  if(week){
+    const days = courseDays(holidays).filter(d => d >= week.start_date && d <= week.end_date);
+    weekHtml = `<aside class="weekbox" aria-label="이번 주">
+      <div class="phase">${week.week_no}주차 · ${esc(week.phase)}</div>
+      <h2>${esc(week.theme)}</h2>
+      <ul class="topics">${(week.topics||[]).map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+      <ul class="weeklist">${days.map(d => {
+        const a = byDate.get(d);
+        if(a) return `<li><a href="#/a/${esc(a.slug)}"><span class="dow">${dowOf(d)} ${fmtShort(d)}</span><span class="t">${esc(a.title)}</span>${read.has(a.slug) ? `<span class="readmark">읽음</span>` : "<span></span>"}</a></li>`;
+        const c = Object.entries(CORNERS).find(([,v]) => v.dow === dowOf(d));
+        return `<li><div class="slot"><span class="dow">${dowOf(d)} ${fmtShort(d)}</span><span class="t">${c ? esc(c[1].name) : ""}${d > today ? " · 예정" : ""}</span><span></span></div></li>`;
+      }).join("")}</ul>
+    </aside>`;
+  }
+
+  $app.innerHTML = `<div class="course"><strong>빅데이터를 활용한 디지털금융 전문가 과정</strong><span>K-Digital Training · 2026.10.30 – 2027.04.16 · 수업 전 7분 데일리 리딩</span></div><div class="today">${lead}${weekHtml}</div>${chartHtml(weeks, holidays, list, read, today)}`;
+  bindChart();
+}
+
+/* 학습 차트: 과정 전체 평일을 막대 하나씩 */
+function chartHtml(weeks, holidays, list, read, today){
+  const days = courseDays(holidays);
+  const byDate = new Map(); list.forEach(a => { if(!byDate.has(a.publish_date)) byDate.set(a.publish_date, a); });
+  const published = list.length;
+  const readCount = list.filter(a => read.has(a.slug)).length;
+  const passed = days.filter(d => d <= today).length;
+  let prevPhase = null;
+  const wkHtml = weeks.map(w => {
+    const wd = days.filter(d => d >= w.start_date && d <= w.end_date);
+    const start = w.phase !== prevPhase; prevPhase = w.phase;
+    const bars = wd.map(d => {
+      const a = byDate.get(d);
+      const cls = ["bar", a && "pub", a && read.has(a.slug) && "read", d === today && "today"].filter(Boolean).join(" ");
+      const h = a ? 40 + Math.min(60, (a.reading_min||6) * 7) : 30;
+      const label = a ? `${fmtD(d)} · ${a.title}${read.has(a.slug) ? " (읽음)" : ""}` : `${fmtD(d)} · ${d > today ? "예정" : "글 없음"}`;
+      return a
+        ? `<a class="${cls}" style="--h:${h}%" href="#/a/${esc(a.slug)}" data-tip="${esc(label)}" aria-label="${esc(label)}"></a>`
+        : `<span class="${cls}" data-tip="${esc(label)}"></span>`;
+    }).join("");
+    return `<div class="wk${start ? " phase-start" : ""}" style="--n:${Math.max(wd.length,1)}">${bars}</div>`;
+  }).join("");
+  // 단계 라벨
+  const phases = [];
+  weeks.forEach(w => {
+    const n = days.filter(d => d >= w.start_date && d <= w.end_date).length;
+    const last = phases[phases.length-1];
+    if(last && last.p === w.phase) last.n += n; else phases.push({p:w.phase, n});
+  });
+  return `<section class="chart" aria-label="나의 학습 차트">
+    <div class="chart-head">
+      <h2>나의 학습 차트</h2>
+      <div class="stat">
+        <div class="up"><strong>${readCount}</strong>읽은 글</div>
+        <div><strong>${published}</strong>올라온 글</div>
+        <div><strong>${passed}<span class="small muted">/${days.length}</span></strong>지나간 수업일</div>
+      </div>
+    </div>
+    <div class="bars">${wkHtml}</div>
+    <div class="phases" aria-hidden="true">${phases.map(p => `<span style="--n:${p.n}">${esc(p.p)}</span>`).join("")}</div>
+    <div class="legend"><span><i style="background:var(--rise)"></i>읽은 날</span><span><i style="background:var(--ink-3)"></i>안 읽은 글</span><span><i style="box-shadow:inset 0 0 0 1px var(--rule)"></i>예정</span><span>읽음 기록은 이 기기의 브라우저에만 저장돼요</span></div>
+  </section>`;
+}
+function bindChart(){
+  const tip = document.getElementById("tip");
+  $app.querySelectorAll(".bar").forEach(b => {
+    const show = e => {
+      tip.textContent = b.dataset.tip; tip.classList.add("on");
+      const r = b.getBoundingClientRect();
+      const x = Math.min(window.innerWidth - tip.offsetWidth - 8, Math.max(8, r.left + r.width/2 - tip.offsetWidth/2));
+      tip.style.left = x + "px"; tip.style.top = (r.top - tip.offsetHeight - 10) + "px";
+    };
+    const hide = () => tip.classList.remove("on");
+    b.addEventListener("mouseenter", show); b.addEventListener("focus", show);
+    b.addEventListener("mouseleave", hide); b.addEventListener("blur", hide);
+  });
+}
+
+/* ================= 페이지: 지난 글 ================= */
+const archiveState = { corner:"", week:"", q:"" };
+async function pageArchive(params){
+  const [weeks, list] = await Promise.all([getWeeks(), getList()]);
+  if(params.tag) archiveState.q = params.tag;
+  const read = readSet();
+  const weekOpts = weeks.map(w => `<option value="${w.week_no}">${w.week_no}주차 · ${esc(w.theme)}</option>`).join("");
+  $app.innerHTML = `<div class="pagehead"><h1>지난 글</h1><p>코너, 주차, 키워드로 지금까지 올라온 글을 찾아보세요.</p></div>
+    <div class="filters">
+      <div class="chips" role="group" aria-label="코너">
+        <button class="chip" data-c="" aria-pressed="false">전체</button>
+        ${Object.entries(CORNERS).map(([k,v]) => `<button class="chip" data-c="${k}" aria-pressed="false">${v.name}</button>`).join("")}
+      </div>
+      <select class="search" id="wsel" aria-label="주차"><option value="">모든 주차</option>${weekOpts}</select>
+      <input class="search" id="q" type="search" placeholder="제목, 태그, 요약에서 찾기" aria-label="검색">
+    </div>
+    <div id="res"></div>`;
+  const res = document.getElementById("res");
+  const q = document.getElementById("q"), wsel = document.getElementById("wsel");
+  q.value = archiveState.q; wsel.value = archiveState.week;
+  const draw = () => {
+    $app.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", String(c.dataset.c === archiveState.corner)));
+    const term = archiveState.q.trim().toLowerCase();
+    const rows = list.filter(a =>
+      (!archiveState.corner || a.corner === archiveState.corner) &&
+      (!archiveState.week || String(a.week_no) === archiveState.week) &&
+      (!term || [a.title, a.subtitle, ...(a.tags||[]), ...(a.summary||[])].join(" ").toLowerCase().includes(term)));
+    if(!list.length){ res.innerHTML = `<div class="empty"><strong>아직 올라온 글이 없어요</strong>첫 글은 ${esc(fmtD(CONFIG.COURSE_START))} 아침에 올라옵니다.</div>`; return; }
+    if(!rows.length){ res.innerHTML = `<div class="empty"><strong>조건에 맞는 글이 없어요</strong>필터를 줄이거나 다른 키워드로 찾아보세요.</div>`; return; }
+    let html = "", cur = null;
+    rows.forEach(a => {
+      if(a.week_no !== cur){
+        if(cur !== null) html += `</ul>`;
+        cur = a.week_no; const w = weeks.find(x => x.week_no === a.week_no);
+        html += `<div class="weekhead"><strong>${a.week_no ?? "-"}주차</strong>${w ? esc(w.theme) : ""}</div><ul class="list">`;
+      }
+      html += `<li><a class="item" href="#/a/${esc(a.slug)}"><div class="when">${esc(fmtShort(a.publish_date))} ${dowOf(a.publish_date)}${read.has(a.slug) ? `<br><span class="readmark">읽음</span>` : ""}</div>
+        <div>${cornerTag(a.corner)}<h3>${esc(a.title)}</h3><p>${esc(a.subtitle || (a.summary||[])[0] || "")}</p></div></a></li>`;
+    });
+    res.innerHTML = html + `</ul>`;
+  };
+  $app.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => { archiveState.corner = c.dataset.c; draw(); }));
+  wsel.addEventListener("change", () => { archiveState.week = wsel.value; draw(); });
+  q.addEventListener("input", () => { archiveState.q = q.value; draw(); });
+  draw();
+}
+
+/* ================= 페이지: 글 상세 ================= */
+async function pageArticle(slug){
+  const [a, list, weeks, jobs] = await Promise.all([getArticle(slug), getList(), getWeeks(), getJobs()]);
+  if(!a){ $app.innerHTML = `<div class="empty"><strong>아직 공개되지 않았거나 없는 글이에요</strong><a href="#/archive">지난 글 목록으로 가기</a></div>`; return; }
+  const terms = (await getTerms()).filter(t => t.article_id === a.id);
+  const week = weeks.find(w => w.week_no === a.week_no);
+  const job = jobs.find(j => j.slug === a.related_job);
+  const idx = list.findIndex(x => x.slug === slug);
+  const newer = idx > 0 ? list[idx-1] : null, older = idx >= 0 ? list[idx+1] : null;
+  const isRead = readSet().has(slug);
+  document.title = `${a.title} | 하루 7분 금융×데이터 – 유비온 디지털교육센터`;
+
+  const quiz = Array.isArray(a.quiz) ? a.quiz : [];
+  const sources = Array.isArray(a.sources) ? a.sources : [];
+
+  $app.innerHTML = `<div class="article" data-corner="${esc(a.corner)}">
+    <div>
+      <header>
+        ${cornerTag(a.corner)}
+        <h1>${esc(a.title)}</h1>
+        ${a.subtitle ? `<p class="sub">${esc(a.subtitle)}</p>` : ""}
+        <div class="meta"><span>${esc(fmtD(a.publish_date))}</span>${week ? `<span>${week.week_no}주차 · ${esc(week.theme)}</span>` : ""}<span>${a.reading_min}분 읽기</span></div>
+      </header>
+      ${a.summary?.length ? `<section class="sumbox"><h2>3줄 요약</h2><ol class="summary">${a.summary.map(s => `<li>${esc(s)}</li>`).join("")}</ol></section>` : ""}
+      <div class="prose" id="body">${renderMd(a.body_md)}</div>
+
+      ${quiz.length ? `<section class="block"><h2>1분 퀴즈</h2>${quiz.map((q,i) => `
+        <div class="quiz" data-i="${i}">
+          <p class="q">Q${i+1}. ${esc(q.q)}</p>
+          <div class="opts">${(q.options||[]).map((o,j) => `<button type="button" class="opt" data-j="${j}">${esc(o)}</button>`).join("")}</div>
+          <p class="explain" hidden></p>
+        </div>`).join("")}</section>` : ""}
+
+      ${terms.length ? `<section class="block"><h2>오늘의 용어</h2><dl class="terms">${terms.map(t => `<div><dt>${esc(t.term)}${t.term_en ? `<span>${esc(t.term_en)}</span>` : ""}</dt><dd>${esc(t.definition)}</dd></div>`).join("")}</dl></section>` : ""}
+
+      ${sources.length ? `<section class="block"><h2>더 보기</h2><ol class="sources">${sources.map(s => `<li><a href="${esc(/^https?:\/\//.test(s.url||"") ? s.url : "#")}" target="_blank" rel="noopener">${esc(s.title || s.url)}</a>${s.note ? ` <span class="muted small">${esc(s.note)}</span>` : ""}</li>`).join("")}</ol></section>` : ""}
+
+      <div class="block"><button type="button" class="btn" id="readBtn" aria-pressed="${isRead}">${isRead ? "읽음으로 표시됨" : "다 읽었어요"}</button></div>
+
+      <nav class="pager" aria-label="이전 다음 글">
+        ${older ? `<a href="#/a/${esc(older.slug)}"><small>이전 글</small>${esc(older.title)}</a>` : "<span></span>"}
+        ${newer ? `<a class="next" href="#/a/${esc(newer.slug)}"><small>다음 글</small>${esc(newer.title)}</a>` : ""}
+      </nav>
+    </div>
+    <aside class="side">
+      ${week ? `<div><h3>이번 주 수업</h3><a href="#/weeks">${week.week_no}주차 · ${esc(week.theme)}</a></div>` : ""}
+      ${job ? `<div><h3>관련 직무</h3><a href="#/jobs/${esc(job.slug)}">${esc(job.name)}</a></div>` : ""}
+      ${a.tags?.length ? `<div><h3>태그</h3><div class="tags">${a.tags.map(t => `<a href="#/archive?tag=${encodeURIComponent(t)}">${esc(t)}</a>`).join("")}</div></div>` : ""}
+    </aside>
+  </div>`;
+
+  highlight($app);
+  $app.querySelectorAll(".quiz").forEach(box => {
+    const q = quiz[+box.dataset.i];
+    box.querySelectorAll(".opt").forEach(btn => btn.addEventListener("click", () => {
+      const j = +btn.dataset.j, ok = j === q.answer;
+      box.querySelectorAll(".opt").forEach(b => { b.disabled = true; if(+b.dataset.j === q.answer) b.classList.add("right"); });
+      if(!ok) btn.classList.add("wrong");
+      const ex = box.querySelector(".explain");
+      ex.innerHTML = `<strong>${ok ? "정답이에요." : "아쉬워요. 정답은 표시된 보기예요."}</strong> ${esc(q.explain || "")}`;
+      ex.hidden = false;
+    }));
+  });
+  const rb = document.getElementById("readBtn");
+  rb.addEventListener("click", () => {
+    const on = toggleRead(slug);
+    rb.setAttribute("aria-pressed", String(on));
+    rb.textContent = on ? "읽음으로 표시됨" : "다 읽었어요";
+  });
+}
+
+/* ================= 페이지: 용어사전 ================= */
+const CHO = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+const MERGE = {"ㄲ":"ㄱ","ㄸ":"ㄷ","ㅃ":"ㅂ","ㅆ":"ㅅ","ㅉ":"ㅈ"};
+function initial(s){
+  const c = s.trim().charCodeAt(0);
+  if(c >= 0xAC00 && c <= 0xD7A3){ const ch = CHO[Math.floor((c-0xAC00)/588)]; return MERGE[ch] || ch; }
+  const ch = s.trim()[0]?.toUpperCase() || "#";
+  return /[A-Z]/.test(ch) ? ch : "#";
+}
+async function pageTerms(){
+  const [terms, list] = await Promise.all([getTerms(), getList()]);
+  const byId = new Map(list.map(a => [a.id, a]));
+  $app.innerHTML = `<div class="pagehead"><h1>용어사전</h1><p>글에 나온 용어가 매일 쌓여요. 지금까지 ${terms.length}개.</p></div>
+    <div class="filters"><input class="search" id="tq" type="search" placeholder="용어 찾기 (한글·영문)" aria-label="용어 검색"></div><div id="tres"></div>`;
+  const out = document.getElementById("tres"), q = document.getElementById("tq");
+  const draw = () => {
+    const k = q.value.trim().toLowerCase();
+    const rows = terms.filter(t => !k || [t.term, t.term_en, t.definition].join(" ").toLowerCase().includes(k))
+      .sort((a,b) => a.term.localeCompare(b.term, "ko"));
+    if(!terms.length){ out.innerHTML = `<div class="empty"><strong>아직 용어가 없어요</strong>글이 올라오면 그날의 용어가 여기에 모입니다.</div>`; return; }
+    if(!rows.length){ out.innerHTML = `<div class="empty"><strong>“${esc(q.value)}”에 해당하는 용어가 없어요</strong>철자를 바꾸거나 영문으로 찾아보세요.</div>`; return; }
+    const groups = new Map();
+    rows.forEach(t => { const g = initial(t.term); if(!groups.has(g)) groups.set(g, []); groups.get(g).push(t); });
+    out.innerHTML = `<div class="glossary">${[...groups].map(([g, ts]) => `<section><h2>${esc(g)}</h2><dl>${ts.map(t => {
+      const a = byId.get(t.article_id);
+      return `<dt>${esc(t.term)}${t.term_en ? `<small>${esc(t.term_en)}</small>` : ""}</dt><dd>${esc(t.definition)}${a ? ` <a href="#/a/${esc(a.slug)}">${esc(fmtShort(a.publish_date))} 글에서</a>` : ""}</dd>`;
+    }).join("")}</dl></section>`).join("")}</div>`;
+  };
+  q.addEventListener("input", draw); draw();
+}
+
+/* ================= 페이지: 직무 지도 ================= */
+async function pageJobs(){
+  const jobs = await getJobs();
+  $app.innerHTML = `<div class="pagehead"><h1>직무 지도</h1><p>이 과정을 마치고 도전할 수 있는 금융권 데이터 직무예요. 화요일 ‘직무 돋보기’ 글이 쌓이면 직무별로 모여요.</p></div>
+    <div class="jobs">${jobs.map(j => `<a class="job" href="#/jobs/${esc(j.slug)}"><h3>${esc(j.name)}</h3><p>${esc(j.one_liner)}</p><div class="where">${esc((j.workplaces||[]).join(", "))}</div></a>`).join("")}</div>`;
+}
+async function pageJob(slug){
+  const [jobs, list, weeks] = await Promise.all([getJobs(), getList(), getWeeks()]);
+  const j = jobs.find(x => x.slug === slug);
+  if(!j){ $app.innerHTML = `<div class="empty"><strong>없는 직무예요</strong><a href="#/jobs">직무 지도로 가기</a></div>`; return; }
+  document.title = `${j.name} | 하루 7분 금융×데이터 – 유비온 디지털교육센터`;
+  const arts = list.filter(a => a.related_job === slug);
+  const ul = xs => xs?.length ? `<ul>${xs.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : `<p class="muted small">준비 중</p>`;
+  $app.innerHTML = `<div class="pagehead"><a href="#/jobs" class="small muted">직무 지도</a><h1>${esc(j.name)}</h1><p>${esc(j.one_liner)}</p></div>
+    <div class="jobdetail">
+      <div><h2>어디서 일하나요</h2>${ul(j.workplaces)}</div>
+      <div><h2>무슨 일을 하나요</h2>${ul(j.tasks)}</div>
+      <div><h2>어떤 데이터를 다루나요</h2>${ul(j.data_used)}</div>
+      <div><h2>필요한 역량</h2>${ul(j.skills)}</div>
+      <div><h2>도움이 되는 자격증</h2>${ul(j.certs)}</div>
+      <div><h2>이 과정에서 연결되는 주차</h2><div class="weeklinks">${(j.related_weeks||[]).map(n => { const w = weeks.find(x => x.week_no === n); return `<a href="#/weeks" title="${esc(w?.theme||"")}">${n}주차</a>`; }).join("")}</div></div>
+    </div>
+    <section class="block" style="max-width:none"><h2>관련 글</h2>${arts.length
+      ? `<ul class="list">${arts.map(a => `<li><a class="item" href="#/a/${esc(a.slug)}"><div class="when">${esc(fmtShort(a.publish_date))}</div><div>${cornerTag(a.corner)}<h3>${esc(a.title)}</h3></div></a></li>`).join("")}</ul>`
+      : `<p class="muted">아직 이 직무를 다룬 글이 없어요. 화요일마다 직무 이야기가 올라옵니다.</p>`}</section>`;
+}
+
+/* ================= 페이지: 커리큘럼 ================= */
+async function pageWeeks(){
+  const [weeks, list] = await Promise.all([getWeeks(), getList()]);
+  const today = todayKST();
+  const cnt = new Map(); list.forEach(a => cnt.set(a.week_no, (cnt.get(a.week_no)||0)+1));
+  $app.innerHTML = `<div class="pagehead"><h1>커리큘럼</h1><p>데일리 리딩은 그 주 수업 주제에 맞춰 올라와요. 5.5개월 동안의 흐름이에요.</p></div>
+    <ol class="curri">${weeks.map(w => {
+      const now = today >= w.start_date && today <= w.end_date;
+      return `<li class="${now ? "now" : ""}"${now ? ' aria-current="true"' : ""}>
+        <div class="no">${w.week_no}주차</div>
+        <div class="dates">${esc(fmtShort(w.start_date))} – ${esc(fmtShort(w.end_date))}${cnt.get(w.week_no) ? `<br>글 ${cnt.get(w.week_no)}편` : ""}</div>
+        <div><div class="ph">${esc(w.phase)}</div><h3>${esc(w.theme)}</h3><p>${esc((w.topics||[]).join(" / "))}</p></div>
+      </li>`; }).join("")}</ol>`;
+}
+
+/* ================= 라우터 ================= */
+async function route(){
+  const raw = location.hash.slice(1) || "/";
+  const [path, qs] = raw.split("?");
+  const params = Object.fromEntries(new URLSearchParams(qs || ""));
+  const parts = path.split("/").filter(Boolean);
+  const section = parts[0] === "a" ? "archive" : (parts[0] || "home");
+  document.querySelectorAll("[data-nav]").forEach(a => {
+    if(a.dataset.nav === section) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
+  });
+  document.title = "하루 7분 금융×데이터 | 빅데이터를 활용한 디지털금융 전문가 과정 – 유비온 디지털교육센터";
+  document.getElementById("tip").classList.remove("on");
+  $app.innerHTML = loading();
+  window.scrollTo(0,0);
+  try{
+    if(!parts.length) await pageHome();
+    else if(parts[0] === "a" && parts[1]) await pageArticle(decodeURIComponent(parts[1]));
+    else if(parts[0] === "archive") await pageArchive(params);
+    else if(parts[0] === "terms") await pageTerms();
+    else if(parts[0] === "jobs" && parts[1]) await pageJob(decodeURIComponent(parts[1]));
+    else if(parts[0] === "jobs") await pageJobs();
+    else if(parts[0] === "weeks") await pageWeeks();
+    else $app.innerHTML = `<div class="empty"><strong>없는 페이지예요</strong><a href="#/">오늘의 글로 가기</a></div>`;
+  }catch(e){ console.error(e); $app.innerHTML = errorBox(e); }
+}
+window.addEventListener("hashchange", route);
+
+/* 테마 */
+(function(){
+  const saved = store.get("dr.theme", null);
+  if(saved) document.documentElement.dataset.theme = saved;
+  document.getElementById("themeBtn").addEventListener("click", () => {
+    const cur = document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const next = cur === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next; store.set("dr.theme", next);
+  });
+})();
+route();
+</script>
+</body>
+</html>
